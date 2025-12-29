@@ -76,37 +76,6 @@ class ClientsTableSeeder extends Seeder
         DB::table("clients")->insert($param);
 
         $param = [
-            "name" => "江戸国道事務所",
-            "answer_address1" => "関東地方整備局長",
-            "answer_address2" => "江戸国道事務所長",
-            "numbering_name" => "江国交特車",
-            "fax_address1" => "国土交通省 関東地方整備局",
-            "fax_address2" => "江戸国道事務所",
-            "fax_address3" => " 特殊車両通行許可申請窓口担当",
-            "fax" => "03-3512-9000",
-            "tel" => "03-3512-9100",
-            "short_name" => "江戸国道",
-            "prefecture_code" => 13,
-            "hidden" => false,
-        ];
-        DB::table("clients")->insert($param);
-
-        $param = [
-            "name" => "川崎中原市",
-            "answer_address1" => "川崎中原市長",
-            "answer_address2" => "建設局道路河川管理部道路課",
-            "numbering_name" => "7川建道",
-            "fax_address1" => "川崎中原市建設局 道路河川管理部 道路課",
-            "fax_address3" => " 特殊車両担当",
-            "fax" => "044-200-2800",
-            "tel" => "044-200-4010",
-            "short_name" => "川崎中原市",
-            "prefecture_code" => 14,
-            "hidden" => false,
-        ];
-        DB::table("clients")->insert($param);
-
-        $param = [
             "name" => "川崎中原市",
             "answer_address1" => "川崎中原市長",
             "answer_address2" => "建設局道路河川管理部道路課",
