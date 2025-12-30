@@ -9,11 +9,17 @@
 <div class="content">
 
     <div class="content-sub">
+        <div class="content-title">相手先一覧</div>
         <ul class="tab-menu">
             <li class="list-item1"><a class="link-tab" href="/clientlist/create">新規作成</a></li>
             <li class="list-item2"><a class="link-tab" href="/clientlist/edit"> 非表示リスト</a></li>
         </ul>
     </div>
+    @if(session("success"))
+        <div class="alert-success">
+            {{ session("success") }}
+        </div>
+    @endif
 
     <table class="list-client">
         <thead>

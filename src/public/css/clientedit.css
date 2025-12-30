@@ -4,6 +4,27 @@
     padding: 20px 0;
 }
 
+.title-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.content-title {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.content-back::before {
+    content: "▶";
+    margin-right: 6px;
+}
+
+.content-back a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .content-group {
     display: grid;
     grid-template-columns: 250px 1fr;
@@ -59,7 +80,8 @@
     align-self: center;
 }
 
-.item-form input {
+.item-form input,
+.item-form select {
     width: 230px;
     height: 25px;
 }
@@ -79,4 +101,9 @@
     border-radius: 3px;
     box-shadow: 3px 3px #e3e4dc;
     cursor: pointer;
+}
+
+.item-error {
+    font-size: 14px;
+    color: #f00;
 }

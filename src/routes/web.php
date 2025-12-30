@@ -9,3 +9,4 @@ Route::get('/', [UserController::class, "index"])->name('index');
 
 Route::get('/clientlist', [ListController::class, "clientList"])->name('clientList');
 Route::get('clientlist/create', [ListController::class, "clientCreate"])->name('clientCreate');
+Route::post('/client_create_request', [ListController::class, "clientStore"])->name('clientStore');

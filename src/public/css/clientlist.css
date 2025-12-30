@@ -1,12 +1,27 @@
 .content {
+    min-width: 1150px;
     width: 80%;
     margin: 0 auto;
     padding: 20px 0;
     text-align: center;
 }
 
+
+
 .content-sub{
-    padding-bottom: 30px;
+    padding-bottom: 10px;
+    margin: 0 auto;
+    width: 80%;
+    min-width: 1150px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.content-title {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: left;
 }
 
 .tab-menu {
@@ -30,6 +45,17 @@
     box-shadow: 3px 3px #e3e4dc;
 }
 
+.alert-success {
+    text-align: left;
+    padding: 5px 0;
+}
+
+.alert-success::before {
+    content: "■";
+    margin-right: 5px;
+}
+
+
 .link-tab {
     text-decoration: none;
     color: inherit;
@@ -41,6 +67,8 @@
 
 .list-client {
     margin: 0 auto;
+    width: 80%;
+    min-width: 1150px;
 }
 
 .list-client thead {

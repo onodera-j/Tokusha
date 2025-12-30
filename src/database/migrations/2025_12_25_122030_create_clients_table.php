@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string("name");
+            $table->string("short_name");
+            $table->integer("prefecture_code");
+            $table->string("tel");
+            $table->string("fax");
             $table->string("answer_address1");
-            $table->string("answer_address2");
+            $table->string("answer_address2")->nullable();
             $table->string("numbering_name");
             $table->string("fax_address1");
             $table->string("fax_address2")->nullable();
             $table->string("fax_address3");
-            $table->string("fax");
-            $table->string("tel");
-            $table->string("short_name");
-            $table->integer("prefecture_code");
-            $table->boolean("hidden");
+            $table->boolean("hidden")->default(false);
             $table->timestamps();
         });
     }
