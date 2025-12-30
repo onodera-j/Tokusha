@@ -107,3 +107,17 @@
     font-size: 14px;
     color: #f00;
 }
+
+.button-delete {
+    text-align: right;
+}
+
+
+.delete {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #99836e;
+    font-weight: bold;
+    text-decoration: underline;
+}
