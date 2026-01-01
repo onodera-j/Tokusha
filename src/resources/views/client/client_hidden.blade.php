@@ -11,7 +11,6 @@
     <div class="content-sub">
         <div class="content-title">相手先一覧（非表示リスト）</div>
         <ul class="tab-menu">
-            <li class="list-item1"><a class="link-tab" href="/clientlist/create">新規作成</a></li>
             <li class="list-item2"><a class="link-tab" href="/clientlist"> 一覧へ戻る</a></li>
         </ul>
     </div>

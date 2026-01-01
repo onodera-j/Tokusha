@@ -23,5 +23,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(ClientsTableSeeder::class);
+        $this->call(RouteCategoriesSeeder::class);
+        $this->call(RouteTableSeeder::class);
     }
 }
