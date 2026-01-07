@@ -16,3 +16,6 @@ Route::get('/clientlist/hidden', [ListController::class, "clientHidden"])->name(
 Route::patch('/client/{client}/hide',[ListController::class, "clientHide"])->name('clientHide');
 Route::patch('/client/{client}/unhide',[ListController::class, "clientUnhide"])->name('clientUnhide');
 Route::delete('clientlist/{client}/destroy', [ListController::class, "clientDestroy"])->name("clientDestroy");
+
+Route::get('/routelist', [ListController::class, 'routeList'])->name('routeList');
+Route::get('/routelist/edit', [ListController::class, "routeEdit"])->name('routeEdit');

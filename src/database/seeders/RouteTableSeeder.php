@@ -80,5 +80,100 @@ class RouteTableSeeder extends Seeder
                 "name" => "【経路{$i}】",
             ]);
         }
+
+        $route = Route::where('routecategory_id', 3)
+            ->where('short_number', 5)
+            ->update([
+                'remarks' => '本村橋（耐荷重14t）',
+            ]);
+
+        $route = Route::where('routecategory_id', 3)
+            ->where('short_number', 190)
+            ->update([
+                'remarks' => '代右衛門橋（耐荷重20t）',
+            ]);
+
+        $route = Route::where('routecategory_id', 3)
+            ->where('short_number', 219)
+            ->update([
+                'remarks' => '常盤橋（耐荷重20t）',
+            ]);
+        $route = Route::where('routecategory_id', 3)
+            ->where('short_number', 228)
+            ->update([
+                'remarks' => '山下橋（耐荷重20t）',
+            ]);
+        $route = Route::where('routecategory_id', 3)
+            ->where('short_number', 230)
+            ->update([
+                'remarks' => '代々幡橋（耐荷重20t）',
+            ]);
+        $route = Route::where('routecategory_id', 4)
+            ->where('short_number', 494)
+            ->update([
+                'remarks' => '新豊澤橋（耐荷重9t）',
+            ]);
+        $route = Route::where('routecategory_id', 4)
+            ->where('short_number', 547)
+            ->update([
+                'remarks' => '氷川橋（耐荷重9t）',
+            ]);
+        $route = Route::where('routecategory_id', 4)
+            ->where('short_number', 561)
+            ->update([
+                'remarks' => '比丘橋（耐荷重20t）',
+            ]);
+        $route = Route::where('routecategory_id', 5)
+            ->where('short_number', 606)
+            ->update([
+                'remarks' => '旧渋谷川遊歩道（耐荷重14t）',
+            ]);
+        $route = Route::where('routecategory_id', 5)
+            ->where('short_number', 847)
+            ->update([
+                'remarks' => '地蔵橋（耐荷重14t）',
+            ]);
+        $route = Route::where('routecategory_id', 5)
+            ->where('short_number', 894)
+            ->update([
+                'remarks' => '八幡橋（耐荷重20t）',
+            ]);
+        $route = Route::where('routecategory_id', 5)
+            ->where('short_number', 898)
+            ->update([
+                'remarks' => 'なかよし橋（耐荷重9t）',
+            ]);
+        $route = Route::where('routecategory_id', 6)
+            ->where('short_number', 900)
+            ->update([
+                'remarks' => 'なかよし橋（耐荷重9t）',
+            ]);
+        $route = Route::where('routecategory_id', 1)
+            ->where('short_name', "代特")
+            ->where('short_number', 3)
+            ->update([
+                'remarks' => '水道局許可',
+            ]);
+        $route = Route::where('routecategory_id', 1)
+            ->where('short_name', "東特")
+            ->where('short_number', 3)
+            ->update([
+                'remarks' => '氷川橋（耐荷重9t）',
+            ]);
+        $route = Route::where('routecategory_id', 2)
+            ->where('short_number', 5)
+            ->update([
+                'remarks' => '橋梁（耐荷重20t）',
+            ]);
+        $route = Route::where('routecategory_id', 2)
+            ->where('short_number', 13)
+            ->update([
+                'remarks' => '恵比寿南橋（耐荷重20t）',
+            ]);
+        $route = Route::where('routecategory_id', 2)
+            ->where('short_number', 15)
+            ->update([
+                'remarks' => '参宮橋（耐荷重20t）',
+            ]);
     }
 }

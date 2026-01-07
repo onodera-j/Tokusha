@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Client;
+use App\Models\Route;
 use App\Http\Requests\StoreClientRequest;
 
 class ListController extends Controller
@@ -91,6 +92,15 @@ class ListController extends Controller
     public function clientDestroy(Client $client){
         $client->delete();
         return redirect("/clientlist/hidden");
+    }
+
+
+    //登録路線一覧ページの表示
+    public function routeList() {
+
+        $routes = Route::where('delete_flags', 0)->get();
+
+        return view("route.routelist", compact('routes'));
     }
 
 }
