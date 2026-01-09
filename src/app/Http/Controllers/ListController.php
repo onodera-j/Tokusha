@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Client;
 use App\Models\Route;
 use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\StoreRouteRequest;
 
 class ListController extends Controller
 {
@@ -52,7 +53,7 @@ class ListController extends Controller
 
         return view("client.client_edit", compact("client"));
     }
-    //詳細内容変更
+    //相手先詳細内容変更
     public function clientUpdate(StoreClientRequest $request, Client $client){
         DB::transaction(function () use ($request, $client) {
             $client->update($request->validated());
@@ -101,6 +102,57 @@ class ListController extends Controller
         $routes = Route::where('delete_flags', 0)->get();
 
         return view("route.routelist", compact('routes'));
+    }
+
+    //登録路線詳細
+    public function routeEdit(Request $request){
+        $id = $request->id;
+        $route = Route::find($id);
+
+        return view("route.route_edit", compact("route"));
+    }
+
+    //路線詳細内容変更
+    public function routeUpdate(StoreRouteRequest $request, Route $route){
+        DB::transaction(function () use ($request, $route) {
+            $route->update($request->validated());
+            });
+
+            return redirect("/routelist")->with("success", "登録情報を更新しました");
+    }
+
+    //路線新規登録ページの表示
+    public function routeCreate(){
+
+        $user = Auth::user();
+
+        return view("route.route_create");
+    }
+
+    //路線新規登録
+    public function routeStore(StoreRouteRequest $request){
+        DB::beginTransaction();
+        try{
+
+            Route::create($request->validated());
+
+            DB::commit();
+
+            return redirect("/routelist")->with("success", "新規登録が完了しました");
+
+        }catch(\Exception $e) {
+            DB::rollback();
+            Log::error("Error: " . $e->getMessage());
+            return back()->withErrors(["error", "エラーが発生しました"]);
+        }
+    }
+
+    //路線削除
+    public function routeDestroy(Route $route){
+        $route->update([
+            "delete_flags" => 1,
+        ]);
+        return redirect("/routelist");
     }
 
 }

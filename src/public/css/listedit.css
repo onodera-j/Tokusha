@@ -36,7 +36,7 @@
 }
 
 .group-title {
-    grid-row: 1/4;
+    grid-row: 1/5;
     background-color: #e5d9c7;
     color: #99836e;
     font-weight: bold;
@@ -59,6 +59,7 @@
     display: grid;
     grid-template-columns: auto 1fr;
     column-gap: 8px;
+    margin: 2px 0;
 }
 
 .item-title.required::before {
@@ -84,6 +85,30 @@
 .item-form select {
     width: 230px;
     height: 25px;
+}
+
+.item-form.shortcode input {
+    width: 100px;
+}
+
+.item-form.radio input {
+    width: 30px;
+}
+
+
+
+.item-form textarea {
+    width: 230px;
+    height: 45px;
+    resize: none;
+    padding: 5px;
+}
+
+.radio-group {
+    display: flex;
+    align-items: normal;
+    gap: 5px;
+    margin: 2px;
 }
 
 .button-submit {

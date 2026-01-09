@@ -11,8 +11,7 @@
     <div class="content-sub">
         <div class="content-title">登録路線一覧</div>
         <ul class="tab-menu">
-            <li class="list-item1"><a class="link-tab" href="/clientlist/create">新規作成</a></li>
-            <li class="list-item2"><a class="link-tab" href="/clientlist/hidden"> 非表示リスト</a></li>
+            <li class="list-item1"><a class="link-tab" href="/routelist/create">新規作成</a></li>
         </ul>
     </div>
     <div class="content-tab">
@@ -39,7 +38,7 @@
                     <th>道路名</th>
                     <th>備考</th>
                     <th></th>
-                    <th></th>
+
 
                 </tr>
             </thead>
@@ -49,20 +48,9 @@
                     <td>{{ $route->short_name }}{{ $route->short_number }}</td>
                     <td>{{ $route->name }}</td>
                     <td>{{ $route->remarks }}</td>
-
-                    <td></td>
                     <td><a href="{{ route("routeEdit", ["id" => $route->id ]) }}"><span class="style-detail">詳細</span></td>
-                    {{-- <td>
-                        <form method="POST" action="{{ route("clientHide", $client->id) }}">
-                            @method("PATCH")
-                            @csrf
-                            <button class="button-submit" type="submit"><img class="hidden" src="{{ asset('/img/icon_hidden.png') }}" width="15" height="15"></button>
-                        </form>
-                    </td> --}}
                 </tr>
                 @endforeach
-
-
 
             </tbody>
         </table>
