@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRouteRequest extends FormRequest
+class StoreConditionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,21 +22,20 @@ class StoreRouteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "routecategory_id" => ["required","integer"],
-            "name" => ["required","string"],
-            "remarks" => ["nullable","string"],
-            "short_name" => ["nullable","string"],
-            "short_number" => ["nullable","integer"],
+            "conditioncategory_id" => ["required","integer"],
+            "flag" => ["nullable","string"],
+            "sort_order" => ["nullable","integer"],
+            "content" => ["required","string"],
             "delete_flags" => ["nullable","boolean"],
         ];
     }
 
-     public function messages(): array
+    public function messages(): array
     {
         return [
-            'routecategory_id.required' => 'カテゴリを選択してください',
-            'name.required' => '路線名を入力してください',
-            'short_number.integer' => '短縮番号は数値を入力してください'
+            'conditioncategory_id.required' => 'カテゴリを選択してください',
+            'content.required' => '通行条件を入力してください',
+            'sort_order.integer' => '優先順位は数値を入力してください'
         ];
     }
 }

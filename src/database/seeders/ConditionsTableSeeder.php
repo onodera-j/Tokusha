@@ -30,7 +30,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 1,
             "flag" => "C",
-            "index" => 1,
+            "sort_order" => 1,
             "content"=> "当該車両は車道中央を大幅に超えての走行になるため誘導員を配し、周囲の安全に配慮の上、徐行すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -38,7 +38,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 1,
             "flag" => "C",
-            "index" => 2,
+            "sort_order" => 2,
             "content"=> "当該車両は車道中央を大幅に超えての走行になるため誘導車を配し、周囲の安全に配慮の上、徐行すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -46,7 +46,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 2,
             "flag" => "B",
-            "index" => 1,
+            "sort_order" => 1,
             "content"=> "申請経路上の折進部分は中央線を超えての走行となるため、周囲の安全に配慮の上、徐行すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -54,7 +54,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 2,
             "flag" => "C",
-            "index" => 1,
+            "sort_order" => 1,
             "content"=> "交差点折進部分は道路中央を大幅に超えての走行になるため、誘導員を配し、徐行すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -62,7 +62,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 2,
             "flag" => "C",
-            "index" => 2,
+            "sort_order" => 2,
             "content"=> "交差点折進部分は道路中央を大幅に超えての走行になるため、誘導車を配し、徐行すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -231,7 +231,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 8,
             "flag" => "847",
-            "index" => 1,
+            "sort_order" => 1,
             "content"=> "特別区道第847号路線には地蔵橋があり、当該橋梁を通行する際は次の内容を遵守すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -239,7 +239,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 8,
             "flag" => "847",
-            "index" => 2,
+            "sort_order" => 2,
             "content"=> "➀徐行すること。➁当該車両以外の車両（自転車を含む）や、歩行者等が通行しない状態で通行すること。➂２台以上の特殊車両が縦列をなして同時に当該橋梁を通行しないこと（連行禁止）。➃誓約書の内容を遵守すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -247,7 +247,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 8,
             "flag" => "850",
-            "index" => 1,
+            "sort_order" => 1,
             "content"=> "特別区道第850号は水道用地のため、東京都水道局の許可を得、その指示に従うこと。",
         ];
         DB::table("conditions")->insert($param);
@@ -255,7 +255,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 8,
             "flag" => "850",
-            "index" => 2,
+            "sort_order" => 2,
             "content"=> "東京都水道局の「水道用地の通行承認について」、及び渋谷区「誓約書」を遵守すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -270,7 +270,7 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 8,
             "flag" => "1039",
-            "index" => 1,
+            "sort_order" => 1,
             "content"=> "xx電鉄㈱の「道路侵入条件解除回答書」及び渋谷区「誓約書」を遵守すること。",
         ];
         DB::table("conditions")->insert($param);
@@ -278,10 +278,179 @@ class ConditionsTableSeeder extends Seeder
         $param = [
             "conditioncategory_id" => 8,
             "flag" => "1039",
-            "index" => 2,
+            "sort_order" => 2,
             "content" => "xx㈱の「クレーン作業許可確認書」及び渋谷区「誓約書」を遵守すること。",
         ];
         DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "0",
+            "content" => "申請経路上の折進部分に狭小箇所あり",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "0",
+            "content" => "交差点狭小",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "特8",
+            "content" => "特車8号線、ガード下高さ制限あり（3.9m以下）。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "特13",
+            "content" => "特車13号線に恵比寿南橋（耐荷重20t）が存在する。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "特15",
+            "content" => "特車15号線に参宮橋（耐荷重20t）が存在する。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "東特3",
+            "content" => "東特車3号線には氷川橋（耐荷重9t）が存在する。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "219",
+            "content" => "特別区道第219号路線に常盤橋（耐荷重20t）が存在する。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "228",
+            "content" => "特別区道第228号路線に山下橋（耐荷重20t）が存在する。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "230",
+            "content" => "特別区道第230号路線に代々幡橋（耐荷重20t）が存在する。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "561",
+            "content" => "特別区道第561号路線に比丘橋（耐荷重20t）が存在する。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 10,
+            "flag" => "611",
+            "content" => "特別区道第611号路線は狭小。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "申請車両は重量超過のため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "申請車両では折進困難であるため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "申請車両では折進不可。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "申請車両では曲線部通行不可のため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "申請車両では高さ制限値を超えるため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "申請車両では当該道路の安全な走行が困難であるため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "1申請者",
+            "content" => "申請者と協議の結果、再申請いただくこととなったため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "1申請者",
+            "content" => "申請者より経路変更の申出があったため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "道路現況について申請者と協議した結果、再検討する旨の申出があったため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "0",
+            "content" => "申請者より申請車両での折進可能な軌跡図の作成は困難との回答があったため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "神特1",
+            "content" => "申請車両はxx小学校下交差点の通過が困難であるため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "553",
+            "content" => "特別区道第553号路線の実走行可能道路幅員の最小が250㎝のため。",
+        ];
+        DB::table("conditions")->insert($param);
+
+        $param = [
+            "conditioncategory_id" => 11,
+            "flag" => "993",
+            "content" => "申請車両では特別区道第993号路線の折進が困難であるため。",
+        ];
+        DB::table("conditions")->insert($param);
+
 
     }
 }

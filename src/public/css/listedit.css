@@ -91,6 +91,11 @@
     width: 100px;
 }
 
+.item-form.radio.condition {
+    column-count: 2;
+
+}
+
 .item-form.radio input {
     width: 30px;
 }
@@ -100,6 +105,13 @@
 .item-form textarea {
     width: 230px;
     height: 45px;
+    resize: none;
+    padding: 5px;
+}
+
+.item-form.condition textarea {
+    width: 230px;
+    height: 85px;
     resize: none;
     padding: 5px;
 }

@@ -9,8 +9,9 @@ class Condition extends Model
     protected $fillable = [
         'conditioncategory_id',
         'flag',
-        'index',
+        'sort_order',
         'content',
+        'delete_flags',
     ];
 
     public function conditionCategory()

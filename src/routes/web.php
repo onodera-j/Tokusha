@@ -23,3 +23,10 @@ Route::get('/routelist/create', [ListController::class, 'routeCreate'])->name('r
 Route::patch('/routelist/{route}', [ListController::class, "routeUpdate"])->name('routeUpdate');
 Route::post('/route_create_request', [ListController::class, 'routeStore'])->name('routeStore');
 Route::delete('routelist/{route}/destroy', [ListController::class, "routeDestroy"])->name("routeDestroy");
+
+Route::get('/conditionlist', [ListController::class, "conditionList"])->name('conditionList');
+Route::get('/conditionlist/edit', [ListController::class, "conditionEdit"])->name('conditionEdit');
+Route::get('/conditionlist/create', [ListController::class, 'conditionCreate'])->name('conditionCreate');
+Route::patch('/conditionlist/{condition}', [ListController::class, "conditionUpdate"])->name('conditionUpdate');
+Route::post('/condition_create_request', [ListController::class, 'conditionStore'])->name('conditionStore');
+Route::delete('conditionlist/{condition}/destroy', [ListController::class, "conditionDestroy"])->name("conditionDestroy");

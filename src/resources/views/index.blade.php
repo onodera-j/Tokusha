@@ -20,7 +20,7 @@
         <a class="content-link" href="/routelist"></a>
     </div>
     <div class="content-menu content-sub">
-        回答条件一覧
+        通行条件一覧
         <a class="content-link" href="/conditionlist"></a>
     </div>
     <div class="content-menu content-sub">

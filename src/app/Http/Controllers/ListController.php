@@ -8,8 +8,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Models\Client;
 use App\Models\Route;
+use App\Models\Condition;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\StoreRouteRequest;
+use App\Http\Requests\StoreConditionRequest;
 
 class ListController extends Controller
 {
@@ -155,4 +157,69 @@ class ListController extends Controller
         return redirect("/routelist");
     }
 
+    //通行条件一覧ページの表示
+    public function conditionList() {
+
+        $conditions = Condition::where('delete_flags', 0)
+                ->orderBy('conditioncategory_id', 'asc')
+                ->orderByRaw('flag IS NULL')
+                ->orderBy('flag', 'asc')
+                ->orderByRaw('sort_order IS NULL')
+                ->orderBy('sort_order', 'asc')
+                ->get();
+
+        return view("condition.conditionlist", compact('conditions'));
+    }
+
+    //通行条件詳細
+    public function conditionEdit(Request $request){
+        $id = $request->id;
+        $condition = Condition::find($id);
+
+        return view("condition.condition_edit", compact("condition"));
+    }
+
+    //通行条件詳細内容変更
+    public function conditionUpdate(StoreConditionRequest $request, Condition $condition){
+        DB::transaction(function () use ($request, $condition) {
+            $condition->update($request->validated());
+            });
+
+            return redirect("/conditionlist")->with("success", "登録情報を更新しました");
+    }
+
+    //通行条件新規登録ページの表示
+    public function conditionCreate(){
+
+        $user = Auth::user();
+
+        return view("condition.condition_create");
+    }
+
+    //通行条件新規登録
+    public function conditionStore(StoreConditionRequest $request){
+        DB::beginTransaction();
+        try{
+
+            Condition::create($request->validated());
+
+            DB::commit();
+
+            return redirect("/conditionlist")->with("success", "新規登録が完了しました");
+
+        }catch(\Exception $e) {
+            DB::rollback();
+            Log::error("Error: " . $e->getMessage());
+            return back()->withErrors(["error", "エラーが発生しました"]);
+        }
+    }
+
+    //通行条件削除
+    public function conditionDestroy(Condition $condition){
+
+        $condition->update([
+            "delete_flags" => 1,
+        ]);
+        return redirect("/conditionlist");
+    }
 }

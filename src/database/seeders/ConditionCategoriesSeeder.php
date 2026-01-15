@@ -57,5 +57,15 @@ class ConditionCategoriesSeeder extends Seeder
             "name" => "必須",
         ];
         DB::table("condition_categories")->insert($param);
+
+        $param = [
+            "name" => "道路現況",
+        ];
+        DB::table("condition_categories")->insert($param);
+
+        $param = [
+            "name" => "理由",
+        ];
+        DB::table("condition_categories")->insert($param);
     }
 }

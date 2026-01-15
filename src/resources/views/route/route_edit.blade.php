@@ -51,7 +51,7 @@
             </div>
             <div class="group-item">
                 <div class="item-title required">
-                    カテゴリー
+                    カテゴリ
                 </div>
                 <div class="item-form radio">
                     <div class="radio-group">

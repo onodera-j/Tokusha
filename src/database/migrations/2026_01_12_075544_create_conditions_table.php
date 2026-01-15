@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId("conditioncategory_id");
             $table->string("flag")->nullable();
-            $table->integer("index")->nullable();
+            $table->integer("sort_order")->nullable();
             $table->string("content");
+            $table->boolean("delete_flags")->default(false);
             $table->timestamps();
         });
     }
