@@ -23,9 +23,12 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(ClientsTableSeeder::class);
+        $this->call(AnswerDocumentSettingsTableSeeder::class);
+        $this->call(StaffMembersTableSeeder::class);
         $this->call(RouteCategoriesSeeder::class);
         $this->call(RouteTableSeeder::class);
         $this->call(ConditionCategoriesSeeder::class);
         $this->call(ConditionsTableSeeder::class);
+
     }
 }

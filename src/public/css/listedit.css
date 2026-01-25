@@ -140,6 +140,28 @@
     cursor: pointer;
 }
 
+.submit-delete {
+    width: 70px;
+    margin: 5px 0;
+    padding: 2px;
+    background-color: #e3e4dc;
+    border: 1px solid #99836e;
+    color: #99836e;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.submit-create {
+    width: 70px;
+    margin: 5px 0;
+    padding: 2px;
+    background-color: #99836e;
+    border: 1px solid #99836e;
+    color: #f5f5f5;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
 .item-error {
     font-size: 14px;
     color: #f00;

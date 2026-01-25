@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Client;
 use App\Models\Route;
 use App\Models\Condition;
+use App\Models\AnswerDocumentSetting;
+use App\Models\StaffMember;
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\StoreRouteRequest;
 use App\Http\Requests\StoreConditionRequest;
+use App\Http\Requests\StoreStaffMemberRequest;
+use App\Http\Requests\AnswerSettingRequest;
 
 class ListController extends Controller
 {
@@ -221,5 +225,47 @@ class ListController extends Controller
             "delete_flags" => 1,
         ]);
         return redirect("/conditionlist");
+    }
+
+    //基本情報ページ
+    public function baseData(){
+
+        $answersetting = AnswerDocumentSetting::sole();
+        $members = StaffMember::where("delete_flags",0)->get();
+
+        return view("basedata.basedata", compact("answersetting","members"));
+    }
+    //回答書情報更新
+    public function answerSettingUpdate(AnswerSettingRequest $request, AnswerDocumentSetting $answersetting){
+        DB::transaction(function () use ($request, $answersetting) {
+            $answersetting->update($request->validated());
+            });
+
+            return redirect("/basedata")->with("success", "回答書情報を更新しました");
+    }
+    //担当者削除
+    public function staffDestroy(StaffMember $member){
+
+        $member->update([
+            "delete_flags" => 1,
+        ]);
+        return redirect("/basedata")->with("success", "担当者を削除しました");;
+    }
+    //担当者新規登録
+    public function staffStore(StoreStaffMemberRequest $request){
+        DB::beginTransaction();
+        try{
+
+            StaffMember::create($request->validated());
+
+            DB::commit();
+
+            return redirect("/basedata")->with("success", "担当者登録しました");
+
+        }catch(\Exception $e) {
+            DB::rollback();
+            Log::error("Error: " . $e->getMessage());
+            return back()->withErrors(["error", "エラーが発生しました"]);
+        }
     }
 }

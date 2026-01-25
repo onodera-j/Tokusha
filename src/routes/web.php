@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ListController;
+use App\Http\Controllers\AnswersheetController;
 
 Route::get('/', [UserController::class, "index"])->name('index');
 
@@ -30,3 +31,10 @@ Route::get('/conditionlist/create', [ListController::class, 'conditionCreate'])-
 Route::patch('/conditionlist/{condition}', [ListController::class, "conditionUpdate"])->name('conditionUpdate');
 Route::post('/condition_create_request', [ListController::class, 'conditionStore'])->name('conditionStore');
 Route::delete('conditionlist/{condition}/destroy', [ListController::class, "conditionDestroy"])->name("conditionDestroy");
+
+Route::get('/basedata', [ListController::class,"baseData"])->name("baseData");
+Route::patch('/basedata/{answersetting}', [ListController::class, "answerSettingUpdate"])->name('answerSettingUpdate');
+Route::delete('basedata/{member}/destroy', [ListController::class, "staffDestroy"])->name("staffDestroy");
+Route::post('/basedata/staff_create_request', [ListController::class, 'staffStore'])->name('staffStore');
+
+Route::get('/answersheet', [AnswersheetController::class, "answersheetCreate"])->name("answerSheetCreate");
