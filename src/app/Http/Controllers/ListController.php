@@ -268,4 +268,12 @@ class ListController extends Controller
             return back()->withErrors(["error", "エラーが発生しました"]);
         }
     }
+
+    //回答書作成履歴ページの表示
+    public function historyList() {
+
+
+
+        return view("history.history");
+    }
 }

@@ -5,3 +5,310 @@
     padding: 20px 0;
     text-align: center;
 }
+
+.content-menu {
+    margin: 10px 0 20px;
+}
+
+.menu-title {
+    text-align: left;
+    font-size: 20px;
+    padding: 5px 0;
+}
+
+.radio-form {
+    display: flex;
+    gap: 30px;
+
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-1 {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tab-1>label {
+    flex: 1 1;
+    order: -1;
+    min-width: 70px;
+    padding: .7em 1em .5em;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 0;
+    background-color: #e9f0f6;
+    color: #b9a38e;
+    font-size: .9em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.tab-1>label:hover {
+    opacity: .8;
+}
+
+.tab-1 input {
+    display: none;
+}
+
+.tab-1>div {
+    display: none;
+    width: 100%;
+    padding: 1.5em 1em;
+    background-color: #fff;
+}
+
+.tab-1 .tab-label:has(:checked) {
+    background-color: #fff;
+    border-color: #99836e #f0f0f0 #fff;
+    border-style: solid;
+    border-width: 4px 1px 1px;
+    border-radius: 5px;
+    color: #99836e;
+}
+
+.tab-1 .tab-label:has(:checked)+div {
+    display: block;
+}
+
+.tab-1 .tab-label:has(:checked)+.tab-content {
+    display: block;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+}
+
+.form-block {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    row-gap: 16px;
+
+}
+
+.form-group {
+    display: contents;
+}
+
+.item-title {
+    text-align: left;
+}
+
+.item-title.required::before {
+    content: "必須";
+    margin-right: 5px;
+    padding: 2px 5px;
+    background-color: #99836e;
+    border-radius: 5px;
+    color: #f5f5f5;
+    align-self: center;
+}
+
+.item-title.any::before {
+    content: "任意";
+    margin-right: 5px;
+    padding: 2px 5px;
+    border: 1px solid #99836e;
+    border-radius: 5px;
+    align-self: center;
+}
+
+.item-title.madoguchi::before {
+    content: "窓口";
+    margin-right: 5px;
+    padding: 2px 5px;
+    background-color: #99836e;
+    border-radius: 5px;
+    color: #f5f5f5;
+    align-self: center;
+}
+
+.form-group input {
+    display: inline-block;
+    width: 200px;
+}
+
+.form-group select {
+    display: inline-block;
+    padding: 3px 0;
+    width: 200px;
+}
+
+.item-form {
+    text-align: left;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.route-row {
+    display: flex;
+    gap: 8px;
+    padding: 5px 0;
+}
+
+.right-column {
+    text-align: left;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.condition-title {
+    text-align: left;
+    font-weight: bold;
+}
+
+.condition-content {
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+    padding: 3px 0;
+}
+
+.condition-content input {
+    display: inline-block;
+}
+
+.condition-content .flag{
+    white-space: nowrap;
+    align-self: center;
+}
+
+.condition-content .condition-detail {
+    line-height: 1.6;
+}
+
+.condition-content .detail-text {
+    width: 500px;
+    height: 40px;
+    resize: none;
+    margin-left: 30px;
+    padding: 5px;
+}
+
+.condition-content:has(:checked) {
+    text-decoration: underline;
+}
+
+.roadinformation-block {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.roadinformation-group {
+    display: grid;
+    grid-template-columns: 150px 150px 150px 150px;
+    padding: 5px;
+
+}
+
+.roadinformation-group input{
+    display: block;
+}
+
+.classification-radio-group {
+    display: flex;
+    gap: 50px;
+}
+
+.classification-group {
+    display: flex;
+}
+
+.content-right {
+    display: flex;
+    justify-content: end;
+}
+
+.text-left {
+    display: inline-block;
+    text-align: left;
+    margin-right: 100px;
+}
+
+.width-check-block input{
+    display: block;
+    margin-left: 10px;
+
+}
+
+.width-check-group {
+    display: flex;
+    margin-left: -10px;
+    padding-top: 10px;
+
+}
+
+.content-table {
+    margin-top: 20px;
+}
+
+.style-bold{
+    font-weight: bold;
+}
+
+
+.table-car {
+    width: 100%;
+    /* 横幅いっぱい */
+    table-layout: fixed;
+    /* 列の幅を固定（これがないと中身に合わせて伸び縮みする） */
+    border-collapse: collapse;
+    /* 枠線を1本にまとめる */
+}
+
+.tab-1 .table-car input {
+    display: block;
+    margin: 0 auto;
+    width: 90%;
+    box-sizing: border-box;
+        /* 枠線を含めて100%にする */
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.judge-B {
+    color: orange;
+    font-weight: bold;
+}
+
+.judge-C {
+    color: red;
+    font-weight: bold;
+}
+
+/* テーブルのセル内のテキストがはみ出さないように */
+.table-car td {
+    padding: 5px;
+    text-align: center;
+    font-size: 0.9em;
+}
+
+.button-submit {
+    text-align: center;
+    margin: 30px;
+}
+
+.submit {
+    width: 150px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #99836e;
+    border: 1px solid #99836e;
+    color: #f5f5f5;
+    border-radius: 3px;
+    box-shadow: 3px 3px #e3e4dc;
+    cursor: pointer;
+}
+
+.alert-error{
+    text-align: left;
+}

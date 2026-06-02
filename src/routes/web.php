@@ -38,3 +38,9 @@ Route::delete('basedata/{member}/destroy', [ListController::class, "staffDestroy
 Route::post('/basedata/staff_create_request', [ListController::class, 'staffStore'])->name('staffStore');
 
 Route::get('/answersheet', [AnswersheetController::class, "answersheetCreate"])->name("answerSheetCreate");
+Route::get('/route-categories/{category}/routes',
+    [AnswersheetController::class, 'routeByCategory'])->name('routes.byCategory');
+
+Route::post('/answersheet/registration', [AnswersheetController::class, "answersheetRegistration"])->name('answesheetRegistration');
+
+Route::get('/history', [ListController::class, "historyList"])->name('history');

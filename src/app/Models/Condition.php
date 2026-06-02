@@ -16,6 +16,6 @@ class Condition extends Model
 
     public function conditionCategory()
     {
-        return $this->belongsTo(ConditionCategory::class);
+        return $this->belongsTo(ConditionCategory::class, 'conditioncategory_id');
     }
 }
