@@ -226,7 +226,7 @@ class AnswersheetController extends Controller
                         }
 
                         if(!empty($notConditionIds)) {
-                            $answer->notAllowConditions()->attach($notconditionIds);
+                            $answer->notAllowConditions()->attach($notConditionIds);
                         }
                     }
 

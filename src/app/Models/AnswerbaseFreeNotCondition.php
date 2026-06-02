@@ -8,7 +8,7 @@ class AnswerbaseFreeNotCondition extends Model
 {
     protected $fillable = [
         'answerbase_id',
-        'category',
+        'not_condition_id',
         'condition_free',
     ];
 
