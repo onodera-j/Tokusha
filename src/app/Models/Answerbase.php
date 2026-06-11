@@ -50,9 +50,9 @@ class Answerbase extends Model
         return $this->hasMany(AnswerbaseFreeNotCondition::class);
     }
 
-    public function counters()
+    public function counter()
     {
-        return $this->hasMany(Counter::class);
+        return $this->hasOne(Counter::class);
     }
 
     public function minWidths()
@@ -62,12 +62,22 @@ class Answerbase extends Model
 
     public function otherDestinations()
     {
-        return $this->hasMany(OtherDestination::class);
+        return $this->hasOne(OtherDestination::class);
     }
 
     public function vehicles()
     {
         return $this->hasMany(Vehicle::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class, 'client_id');
+    }
+
+    public function staffs()
+    {
+        return $this->belongsTo(StaffMember::class, 'staff_id');
     }
 
 }

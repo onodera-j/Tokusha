@@ -20,4 +20,9 @@ class Client extends Model
         'fax_address3',
         'hidden',
     ];
+
+    public function answerbases()
+    {
+        return $this->hasMany(Answerbase::class);
+    }
 }

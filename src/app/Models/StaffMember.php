@@ -11,4 +11,10 @@ class StaffMember extends Model
             'name',
             'delete_flags',
     ];
+
+    public function answerbases()
+    {
+        return $this->hasMany(Answerbase::class);
+    }
+    
 }

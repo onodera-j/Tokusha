@@ -43,4 +43,5 @@ Route::get('/route-categories/{category}/routes',
 
 Route::post('/answersheet/registration', [AnswersheetController::class, "answersheetRegistration"])->name('answesheetRegistration');
 
-Route::get('/history', [ListController::class, "historyList"])->name('history');
+Route::get('/history', [AnswersheetController::class, "historyList"])->name('history');
+Route::get('/history/edit', [AnswersheetController::class, "historyEdit"])->name('historyEdit');

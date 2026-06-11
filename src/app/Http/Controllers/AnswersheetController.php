@@ -75,6 +75,8 @@ class AnswersheetController extends Controller
     //協議回答書の新規作成
     public function answersheetRegistration(AnswersheetRequest $request){
 
+        $action = $request->input('action');
+
         $validated = $request->validated();
         //寸法条件の抽出
         $widthConditions = $request->input('width_condition', []);
@@ -88,6 +90,7 @@ class AnswersheetController extends Controller
 
         DB::beginTransaction();
         try{
+            if($action == 'create'){
                 //1.回答書ベースの登録
                 $answer = Answerbase::create([
                     'sheet_type' => $validated['answersheet_type'],
@@ -264,6 +267,13 @@ class AnswersheetController extends Controller
             DB::commit();
 
             return redirect("/history")->with("success", "新規登録が完了しました");
+            }
+
+            if($action === 'update'){
+
+            DB::commit();
+            return redirect()->back()->with('success', 'データを上書きしました');
+            }
 
     }catch(\Exception $e) {
         DB::rollback();
@@ -272,5 +282,53 @@ class AnswersheetController extends Controller
         }
     }
 
+    //回答書作成履歴ページの表示
+    public function historyList() {
+
+        $answerDatas = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'client', 'counter'])->get();
+
+        return view("history.history", compact('answerDatas'));
+    }
+
+    //回答書作成履歴詳細ページの表示
+    public function historyEdit(Request $request){
+        $id = $request->id;
+        $answerData = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'allowConditions', 'allowFreeCondition', 'notAllowConditions', 'notFreeConditions', 'counter', 'minWidths', 'otherDestinations', 'vehicles', 'client', 'staffs', ])->find($id);
+
+        $staffMembers = StaffMember::where("delete_flags", 0)
+                            ->get();
+        $clients = Client::where("hidden", 0)
+                            ->orderBy('prefecture_code', 'asc')->get();
+        $answerSetting = AnswerDocumentSetting::first();
+        $permissionPeriods = PermissionPeriod::all();
+        $routeCategories = RouteCategory::all();
+        $conditions = Condition::with('conditionCategory')
+            ->where('delete_flags',0)
+            ->wherebetween('conditioncategory_id',[1,9])
+            ->orderByRaw("
+                CASE
+                    WHEN conditioncategory_id = 9 THEN 0
+                    ELSE conditioncategory_id
+                END
+            ")
+            ->orderByRaw('flag IS NULL')      // NULLを後ろへ
+            ->orderBy('flag', 'asc')
+            ->orderByRaw('sort_order IS NULL') // NULLを後ろへ
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('conditioncategory_id');
+
+        $notAllows = Condition::with('conditionCategory')
+            ->where('delete_flags',0)
+            ->wherebetween('conditioncategory_id',[10,11])
+            ->orderByRaw('flag IS NULL')      // NULLを後ろへ
+            ->orderBy('flag', 'asc')
+            ->orderByRaw('sort_order IS NULL') // NULLを後ろへ
+            ->orderBy('sort_order')
+            ->get()
+            ->groupBy('conditioncategory_id');
+
+        return view("history.history_edit", compact("answerData", "staffMembers", "clients", "answerSetting", "permissionPeriods", "routeCategories", "conditions", "notAllows"));
+    }
 
 }

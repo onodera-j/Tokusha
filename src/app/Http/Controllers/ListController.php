@@ -269,11 +269,5 @@ class ListController extends Controller
         }
     }
 
-    //回答書作成履歴ページの表示
-    public function historyList() {
-
-
-
-        return view("history.history");
-    }
+    
 }

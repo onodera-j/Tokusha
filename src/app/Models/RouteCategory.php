@@ -13,6 +13,6 @@ class RouteCategory extends Model
 
     public function routes()
     {
-        return $this->hasMany(Route::class);
+        return $this->hasMany(Route::class, 'routecategory_id');
     }
 }
