@@ -90,7 +90,7 @@ class AnswersheetController extends Controller
 
         DB::beginTransaction();
         try{
-            if($action == 'create'){
+            if($action === 'create'){
                 //1.回答書ベースの登録
                 $answer = Answerbase::create([
                     'sheet_type' => $validated['answersheet_type'],
@@ -270,6 +270,179 @@ class AnswersheetController extends Controller
             }
 
             if($action === 'update'){
+
+                $answer = Answerbase::findOrFail($request->input('answer_id'));
+
+                //1.回答書ベースの更新
+                $answer->update([
+                    'sheet_type' => $validated['answersheet_type'],
+                    'numbering_name' => $validated['numbering_name'],
+                    'approval_number' => $validated['approval_number'],
+                    'client_id' => $validated['client_id'],
+                    'application_date' => $validated['application_date'],
+                    'consultation_number' => $validated['consultation_number'],
+                    'destination' => $validated['destination'],
+                    'answer_year' => $validated['answer_year'],
+                    'staff_id' => $validated['staff_id'],
+                    'approval_date' => $validated['approval_date'],
+                ]);
+
+                if(!empty($validated['destination2'])){
+                    $answer->otherDestinations()->updateOrCreate(
+                        ['answerbase_id' => $answer->id],
+                        ['second_destination' => $validated['destination2']],
+                    );
+                }else{
+                    if($answer->otherDestinations()->exists()) {
+                        $answer->otherDestinations()->delete();
+                    }
+                }
+
+                if($validated['answersheet_type'] == 4){
+                    $answer->counter()->updateOrCreate(
+                        ['answerbase_id' => $answer->id],
+                        [
+                            'name' => $validated['applicant_name'],
+                            'permission_period' => $validated['permission_period'],
+                        ],
+                    );
+                }else{
+                    if ($answer->counter()->exists()) {
+                        $answer->counter()->delete();
+                    }
+                }
+
+                //2.車両情報の更新
+
+                if(!empty($validated['roadname_both'])) {
+                    $answer->minWidths()->updateOrCreate(
+                        [
+                            'answerbase_id' => $answer->id,
+                            'road_condition' => 2,
+                        ],
+                        [
+                            'road_name' => $validated['roadname_both'],
+                            'min_width' => $validated['minwidth_both'],
+                            'width_condition' => $widthConditionValue
+                        ]
+                    );
+                }else{
+                    $answer->minWidths()->where('road_condition', 2)->delete();
+                }
+
+                if(!empty($validated['roadname_one'])) {
+                    $answer->minWidths()->updateOrCreate(
+                        [
+                            'answerbase_id' => $answer->id,
+                            'road_condition' => 1,
+                        ],
+                        [
+                            'road_name' => $validated['roadname_one'],
+                            'min_width' => $validated['minwidth_one'],
+                            'width_condition' => $widthConditionValue
+                        ]
+                    );
+                }else{
+                    $answer->minWidths()->where('road_condition', 1)->delete();
+                }
+
+                $answer->vehicles()->delete();
+
+                if($request->has('application_number')) {
+                    foreach($validated['application_number'] as $index => $val) {
+                        $weight = $validated['car_weight'][$index] ??null;
+                        $length = $validated['car_length'][$index] ??null;
+                        $width = $validated['car_width'][$index] ??null;
+                        $height = $validated['car_height'][$index] ??null;
+                        $radius = $validated['car_radius'][$index] ??null;
+
+                        if(!empty($val) || !empty($weight) || !empty($width)) {
+                            $answer->vehicles()->create([
+                                'application_number' => $val,
+                                'weight'         => $weight,
+                                'length'         => $length,
+                                'width'          => $width,
+                                'height'         => $height,
+                                'radius'         => $radius,
+                            ]);
+                        }
+                    }
+                }
+
+                //3.通路・通行条件の更新
+
+                $validated['route_id'] = $validated['route_id'] ?? [];
+                $validated['not_route_id'] = $validated['not_route_id'] ?? [];
+                $validated['condition_id'] = $validated['condition_id'] ?? [];
+                $validated['not_condition_id'] = $validated['not_condition_id'] ?? [];
+
+                $routeIds = array_filter($validated['route_id']);
+                $notRouteIds = array_filter($validated['not_route_id']);
+                $conditionIds = [];
+                $notConditionIds = [];
+                $checkedNotFreeIds = [];
+
+                foreach($validated['condition_id'] as $index => $val) {
+                    if(empty($val)){
+                        continue;
+                    }
+
+                    if($val != -1) {
+                        $conditionIds[] = $val;
+                    }
+                }
+
+                $answer->allowRoutes()->sync($routeIds);
+                $answer->allowConditions()->sync($conditionIds);
+
+                if(in_array('-1', $validated['condition_id']) && !empty($validated['conditions_free'])) {
+                    $answer->allowFreeCondition()->updateOrCreate(
+                        ['condition_id' => -1],
+                        ['condition_free' => $validated['conditions_free'],]
+                    );
+                } else {
+                    if($answer->allowFreeCondition()->exists()) {
+                        $answer->allowFreeCondition()->delete();
+                    }
+                }
+
+
+                foreach($validated['not_condition_id'] as $index => $val) {
+                    if(empty($val)){
+                        continue;
+                    }
+
+                    if($val != -10 && $val != -11) {
+                        $notConditionIds[] = $val;
+                    }else{
+                        $checkedNotFreeIds[] = $val;
+                        $categoryId = abs($val);
+                        $freeText = $validated['not_conditions_free'][$categoryId] ?? null;
+                        if(!empty($freeText)) {
+                            $answer->notFreeConditions()->updateOrCreate(
+                                [
+                                    'answerbase_id' => $answer->id,
+                                    'not_condition_id' => $val,
+                                ],
+                                ['condition_free' => $freeText,]
+                            );
+                        }
+                    }
+                }
+
+                $answer->notAllowRoutes()->sync($notRouteIds);
+                $answer->notAllowConditions()->sync($notConditionIds);
+                if ($answer->notFreeConditions()->whereNotIn('not_condition_id', $checkedNotFreeIds)->exists()) {
+                    $answer->notFreeConditions()->whereNotIn('not_condition_id', $checkedNotFreeIds)->delete();
+                }
+
+
+
+
+
+
+
+
 
             DB::commit();
             return redirect()->back()->with('success', 'データを上書きしました');

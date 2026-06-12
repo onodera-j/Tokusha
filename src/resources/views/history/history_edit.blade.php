@@ -496,6 +496,7 @@
     </div>
 
     <div class="button-submit">
+        <input type="hidden" name="answer_id" value="{{$answerData->id}}">
         <button type="submit" name="action" value="update" class="submit">修正</button>
         <button type="submit" name="action" value="print" class="submit">印刷</button>
     </div>
