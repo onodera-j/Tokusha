@@ -65,3 +65,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     toggleTabs();
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    // 💡 1. 必要な要素（ラジオボタンとセレクトボックス）を取得
+    const radioButtons = document.querySelectorAll('input[name="answersheet_type"]');
+    const clientSelect = document.querySelector('select[name="client_id"]');
+
+    // 💡 2. 連動させる処理を関数化
+    function toggleClientSelect() {
+        // 現在チェックされているラジオボタンを取得
+        const checkedRadio = document.querySelector('input[name="answersheet_type"]:checked');
+
+        // 4番（窓口申請回答）が選ばれていたら、送り先を「0」にする
+        if (checkedRadio && checkedRadio.value === '4') {
+            clientSelect.value = '0';
+        }
+    }
+
+    // 💡 3. ラジオボタンがクリックされた（変更された）ときに動かす
+    radioButtons.forEach(radio => {
+        radio.addEventListener('change', toggleClientSelect);
+    });
+
+    // 💡 4. 画面が開いた瞬間にも一度実行（エラー戻り時などの対策）
+    toggleClientSelect();
+
+
+});
+

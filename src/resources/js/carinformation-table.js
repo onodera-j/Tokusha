@@ -39,6 +39,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 行の自動追加チェックを行う共通関数
+    function checkAndAddEmptyRow() {
+        const lastRow = tableBody.lastElementChild;
+        if (!lastRow) return;
+
+        // 最後の行のすべてのinputに入力があるかチェック
+        // （どこか1つでも空文字ではない＝データが入っているなら新しく1行追加する）
+        const inputs = lastRow.querySelectorAll('input');
+        let hasValue = false;
+        inputs.forEach(input => {
+            if (input.value.trim() !== '') {
+                hasValue = true;
+            }
+        });
+
+        if (hasValue) {
+            const newRow = lastRow.cloneNode(true);
+            newRow.querySelectorAll('input').forEach(input => input.value = '');
+            // 計算セルを初期化
+            [7, 8, 9, 10].forEach(i => newRow.cells[i].textContent = '-');
+            tableBody.appendChild(newRow);
+
+            // No.の更新
+            tableBody.querySelectorAll('tr').forEach((r, i) => r.cells[0].textContent = i + 1);
+        }
+    }
+
     // イベントリスナー（入力があったら計算）
     [bothMinInput, oneMinInput].forEach(el => el.addEventListener('input', calculateAll));
 
@@ -59,4 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
             tableBody.querySelectorAll('tr').forEach((r, i) => r.cells[0].textContent = i + 1);
         }
     });
+    calculateAll();         // 1. 読み込んだ既存データの計算結果を反映
+    checkAndAddEmptyRow();  // 2. 既存データがある場合は、お尻に空行を1行追加！
 });

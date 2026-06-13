@@ -279,6 +279,7 @@
 
                     @foreach($oldRouteCategories as $index => $oldRouCatId)
                         <div class="route-row" data-index="{{ $index }}">
+                            <button type="button" class="btn-delete-row">×</button>
                             <span class="route-number">{{ $index + 1 }}</span>
 
                             {{-- カテゴリ選択 --}}
@@ -359,6 +360,7 @@
                     @endphp
                     @foreach($oldNotRouteCategories as $index => $oldNotRouCatId)
                         <div class="route-row" data-index="{{ $index }}">
+                            <button type="button" class="btn-delete-row">×</button>
                             <span class="route-number">{{ $index + 1 }}</span>
 
                             {{-- カテゴリ選択 --}}

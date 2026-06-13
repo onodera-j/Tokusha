@@ -3,6 +3,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const containers = document.querySelectorAll('.route-rows');
 
     containers.forEach(container => {
+
+        container.addEventListener('click', (e) => {
+            // クリックされたのが削除ボタン（またはその中身）かチェック
+            if (e.target.closest('.btn-delete-row')) {
+                const row = e.target.closest('.route-row');
+                if (!row) return;
+
+                // ⚠️ 注意：最後の1行（空行）を消してしまうと、次が入力できなくなるのでブロック
+                if (container.children.length === 1) {
+                    alert('これ以上行を削除できません。');
+                    return;
+                }
+
+                // 行を削除
+                row.remove();
+
+                // 残った行の番号（No.）を綺麗に上から振り直す
+                resetRowNumbers(container);
+            }
+        });
+
         // 各コンテナ（タブ）ごとにイベントを設定
         container.addEventListener('change', async (e) => {
             const row = e.target.closest('.route-row');
@@ -73,6 +94,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     });
 
+    function resetRowNumbers(container) {
+        const rows = container.querySelectorAll('.route-row');
+        rows.forEach((row, newIndex) => {
+            // HTMLの dataset（data-index="X"）を更新
+            row.dataset.index = newIndex;
+
+            // 画面上の「No.X」というテキストを更新
+            const numberEl = row.querySelector('.route-number');
+            if (numberEl) {
+                numberEl.textContent = newIndex + 1;
+            }
+
+            // 【重要】Laravelの配列に隙間が空かないよう、inputのname属性の添え字を綺麗に並び替える
+            // 例: name="route_id[3]" などを、現在の正しい行番号にリセットします
+            const inputs = row.querySelectorAll('select, input');
+            inputs.forEach(input => {
+                if (input.name) {
+                    // name属性の中の数字 [数字] を現在の newIndex に置換する
+                    input.name = input.name.replace(/\[\d*\]/, `[${newIndex}]`);
+                }
+            });
+        });
+    }
+
     const restoreRoutes = async () => {
         // ページ内に存在するすべてのカテゴリセレクトを確認
         const categorySelects = document.querySelectorAll('.route-category');
@@ -121,7 +166,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
+        checkAndAddInitialEmptyRows();
     };
+
+    function checkAndAddInitialEmptyRows() {
+        containers.forEach(container => {
+            const lastRow = container.lastElementChild;
+            if (!lastRow) return;
+
+            // 最終行の「カテゴリ」または「路線」に既に値が入っているかチェック
+            const categorySelect = lastRow.querySelector('.route-category');
+            const routeSelect = lastRow.querySelector('.route-select');
+
+            // すでに値がある（＝データベースから読み込まれた、またはoldで復元された）なら、新しい空行を1行追加
+            if ((categorySelect && categorySelect.value !== '') || (routeSelect && routeSelect.value !== '')) {
+                addNewRow(container);
+            }
+        });
+    }
 
     // 復元処理を実行
     restoreRoutes();
@@ -139,6 +202,14 @@ document.addEventListener('DOMContentLoaded', () => {
         template.dataset.index = newIndex;
         const numberEl = template.querySelector('.route-number');
         if (numberEl) numberEl.textContent = newIndex + 1;
+
+        // クローンした新しい行のname属性を新しい番号にする ───
+        const inputs = template.querySelectorAll('select, input');
+        inputs.forEach(input => {
+            if (input.name) {
+                input.name = input.name.replace(/\[\d*\]/, `[${newIndex}]`);
+            }
+        });
 
         const categorySelect = template.querySelector('.route-category');
         const routeSelect = template.querySelector('.route-select');

@@ -82,7 +82,7 @@
                     <div class="item-form">
                         <select name="client_id">
                             <option value="" {{ old('client_id') == '' ? 'selected' : ''}}>相手先を選択してください</option>
-                            <option value="0" {{ old('client_id') == '0' ? 'selected' : ''}}>窓口申請(右欄に申請者名)</option>
+                            <option value="0" {{ old('client_id', $answerData->client_id ?? '') == '0' ? 'selected' : ''}}>窓口申請(右欄に申請者名)</option>
                             @foreach($clients as $client)
                                 <option value={{$client->id}}
                                     {{ old('client_id', $answerData->client_id ?? '') == $client->id ? 'selected' : ''}}>{{$client->name}}</option>
@@ -309,6 +309,7 @@
                         @endphp
 
                         <div class="route-row" data-index="{{ $index }}">
+                            <button type="button" class="btn-delete-row">×</button>
                             <span class="route-number">{{ $index + 1 }}</span>
 
                             {{-- カテゴリ選択 --}}
@@ -419,6 +420,7 @@
                             $currentNotRouteId = old('not_route_id.'.$index, $dbNotRoute?->id ?? '');
                         @endphp
                         <div class="route-row" data-index="{{ $index }}">
+                            <button type="button" class="btn-delete-row">×</button>
                             <span class="route-number">{{ $index + 1 }}</span>
 
                             {{-- カテゴリ選択 --}}
