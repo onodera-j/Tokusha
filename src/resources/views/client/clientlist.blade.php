@@ -54,58 +54,7 @@
                 </td>
             </tr>
             @endforeach
-            <tr>
-                <td>札幌開発建設部</td>
-                <td>札建特車</td>
-                <td>03-3463-2777</td>
-                <td>03-5458-7522</td>
-                <td>札幌開発</td>
-                <td></td>
-                <td><span class="style-detail">詳細</span></td>
-                <td><img class="hidden" src="{{ asset('/img/icon_hidden.png') }}" width="15" height="15"></td>
-            </tr>
-            <tr>
-                <td>仙台河川国道事務所</td>
-                <td>東国交特車</td>
-                <td>03-3463-2177</td>
-                <td>03-5548-7522</td>
-                <td>東京国道</td>
-                <td></td>
-                <td><span class="style-detail">詳細</span></td>
-                <td><img class="hidden" src="{{ asset('/img/icon_hidden.png') }}" width="15" height="15"></td>
-            </tr>
-            <tr>
-                <td>仙台河川国道事務所</td>
-                <td>東国交特車</td>
-                <td>03-3463-2177</td>
-                <td>03-5548-7522</td>
-                <td>東京国道</td>
-                <td></td>
-                <td><span class="style-detail">詳細</span></td>
-                <td><img class="hidden" src="{{ asset('/img/icon_hidden.png') }}" width="15" height="15"></td>
-            </tr>
-            <tr>
-                <td>仙台河川国道事務所</td>
-                <td>東国交特車</td>
-                <td>03-3463-2177</td>
-                <td>03-5548-7522</td>
-                <td>東京国道</td>
-                <td></td>
-                <td><span class="style-detail">詳細</span></td>
-                <td><img class="hidden" src="{{ asset('/img/icon_hidden.png') }}" width="15" height="15"></td>
-            </tr>
-            <tr>
-                <td>仙台河川国道事務所</td>
-                <td>東国交特車</td>
-                <td>03-3463-2177</td>
-                <td>03-5548-7522</td>
-                <td>東京国道</td>
-                <td></td>
-                <td><span class="style-detail">詳細</span></td>
-                <td><img class="hidden" src="{{ asset('/img/icon_hidden.png') }}" width="15" height="15"></td>
-            </tr>
-
-
+            
         </tbody>
     </table>
 

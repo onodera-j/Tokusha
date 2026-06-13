@@ -458,9 +458,96 @@ class AnswersheetController extends Controller
     //回答書作成履歴ページの表示
     public function historyList() {
 
-        $answerDatas = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'client', 'counter'])->get();
+        $answerDatas = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'client', 'counter'])
+                        ->orderBy('numbering_name', 'desc')
+                        ->orderBy('approval_number', 'desc')
+                        ->latest()->paginate(5);
 
-        return view("history.history", compact('answerDatas'));
+        $type = 0;
+        $word = null;
+
+
+        return view("history.history", compact('answerDatas', 'type', 'word'));
+    }
+
+    //回答書作成履歴の検索
+    public function historySearch(Request $request) {
+
+        $type = $request->input('search_type');
+        $word = $request->input('keyword');
+
+        $query = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'client', 'counter']);
+
+        if(!empty($word)) {
+            switch($type) {
+                case 1:
+                    $query->where(function($q) use ($word) {
+                        $q->where('numbering_name', 'LIKE', "%{$word}%")
+                          ->orWhere('approval_number', 'LIKE', "%{$word}%");
+                    });
+                break;
+
+                case 2:
+                    $query->whereHas('client', function($q) use ($word) {
+                        $q->where('name', 'LIKE', "%{$word}%");
+                    });
+                break;
+
+                case 3:
+                $query->where('consultation_number', 'LIKE', "%{$word}%");
+                break;
+
+                case 4: // 目的地（例: destination カラムや、別テーブルの second_destination）
+                    $query->where(function($q) use ($word) {
+                        $q->where('destination', 'LIKE', "%{$word}%")
+                        ->orWhereHas('otherDestinations', function($sq) use ($word) {
+                            $sq->where('second_destination', 'LIKE', "%{$word}%");
+                        });
+                    });
+                break;
+
+                case 5:
+                    $query->where(function($q) use ($word) {
+                        $q->whereHas('allowRoutes', function($sq) use ($word) {
+                            $sq->where('short_name', 'LIKE', "%{$word}%")
+                               ->orWhere('short_number', 'LIKE', "%{$word}%");
+                        })
+                        ->orWhereHas('notAllowRoutes', function($sq) use ($word) {
+                            $sq->where('short_name', 'LIKE', "%{$word}%")
+                               ->orWhere('short_number', 'LIKE', "%{$word}%");
+                        });
+                    });
+                break;
+
+                default:
+                    $query->where(function($q) use ($word) {
+                        $q->where('numbering_name', 'LIKE', "%{$word}%")
+                          ->orWhere('approval_number', 'LIKE', "%{$word}%")
+                          ->orWhere('consultation_number', 'LIKE', "%{$word}%")
+                          ->orWhere('destination', 'LIKE', "%{$word}%")
+                          ->orWhereHas('client', function($sq) use ($word) {
+                                $sq->where('name', 'LIKE', "%{$word}%"); })
+                          ->orWhereHas('otherDestinations', function($sq) use ($word) {
+                                $sq->where('second_destination', 'LIKE', "%{$word}%"); })
+                          ->orWhereHas('allowRoutes', function($sq) use ($word) {
+                                $sq->where('short_name', 'LIKE', "%{$word}%")
+                                    ->orWhere('short_number', 'LIKE', "%{$word}%"); })
+                          ->orWhereHas('notAllowRoutes', function($sq) use ($word) {
+                                $sq->where('short_name', 'LIKE', "%{$word}%")
+                                    ->orWhere('short_number', 'LIKE', "%{$word}%"); });
+                    });
+                break;
+            }
+        }
+
+        $answerDatas = $query
+                        ->orderBy('numbering_name', 'desc')
+                        ->orderBy('approval_number', 'desc')
+                        ->latest()->paginate(5);
+
+
+        return view("history.history", compact('answerDatas', 'type', 'word' ));
+
     }
 
     //回答書作成履歴詳細ページの表示

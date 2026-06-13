@@ -10,23 +10,26 @@
 
     <div class="content-sub">
         <div class="content-title">回答書一覧</div>
+        <form method="get" action="{{ url('history/search') }}">
+            @csrf
+        <div class="content-search">
+            <select class="search-select" name="search_type">
+                <option value=0 {{ $type == '0' ? 'selected':''}}>すべて</option>
+                <option value=1 {{ $type == '1' ? 'selected':''}}>採番</option>
+                <option value=2 {{ $type == '2' ? 'selected':''}}>相手方</option>
+                <option value=3 {{ $type == '3' ? 'selected':''}}>協議番号</option>
+                <option value=4 {{ $type == '4' ? 'selected':''}}>目的地</option>
+                <option value=5 {{ $type == '5' ? 'selected':''}}>通行路線</option>
+            </select>
+            <input type="text" name="keyword" class="search-box" value="{{$word}}">
+            <button type="submit" class="search-button">検索</button>
+        </div>
+        </form>
         <ul class="tab-menu">
-            <li class="list-item1"><a class="link-tab" href="/conditionlist/create">新規作成</a></li>
+            <li class="list-item1"><a class="link-tab" href="/answersheet">新規作成</a></li>
         </ul>
     </div>
-    <div class="content-tab">
-        <ul class="condition-tab">
-            <li class="tab-index">許可</li>
-            <li class="tab-item" data-category="1">幅員</li>
-            <li class="tab-item" data-category="2">折進</li>
 
-            <li class="flex-break"></li>
-            <li class="tab-index">不許可</li>
-            <li class="tab-item" data-category="10">道路現況</li>
-            <li class="tab-item" data-category="11">理由</li>
-        </ul>
-
-    </div>
     @if(session("success"))
         <div class="alert-success">
             {{ session("success") }}
@@ -73,6 +76,9 @@
 
             </tbody>
         </table>
+    </div>
+    <div class="pagination-wrapper">
+        {{ $answerDatas->appends(request()->query())->links() }}
     </div>
 
 
