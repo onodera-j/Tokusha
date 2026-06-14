@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId("answerbase_id");
             $table->string("name");
-            $table->integer("permission_period");
+            $table->integer("permission_period_id");
             $table->timestamps();
         });
     }

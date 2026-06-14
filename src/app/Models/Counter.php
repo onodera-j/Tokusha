@@ -16,4 +16,9 @@ class Counter extends Model
     {
         return $this->belongsTo(Answerbase::class, 'answerbase_id');
     }
+
+    public function permissionperiod()
+    {
+        return $this->belongsTo(PermissionPeriod::class, 'permission_period_id');
+    }
 }
