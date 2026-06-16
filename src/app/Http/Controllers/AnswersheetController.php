@@ -108,9 +108,9 @@ class AnswersheetController extends Controller
                 $answerId = $answer->id;
 
                 if($validated['answersheet_type'] == 4) {
-                    $answer->counters()->create([
+                    $answer->counter()->create([
                         'name' => $validated['applicant_name'],
-                        'permission_period' => $validated['permission_period'],
+                        'permission_period_id' => $validated['permission_period'],
                     ]);
                 }
 
@@ -303,7 +303,7 @@ class AnswersheetController extends Controller
                         ['answerbase_id' => $answer->id],
                         [
                             'name' => $validated['applicant_name'],
-                            'permission_period' => $validated['permission_period'],
+                            'permission_period_id' => $validated['permission_period'],
                         ],
                     );
                 }else{

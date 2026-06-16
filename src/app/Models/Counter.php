@@ -9,7 +9,7 @@ class Counter extends Model
     protected $fillable = [
         'answerbase_id',
         'name',
-        'permission_period',
+        'permission_period_id',
     ];
 
     public function answerbase()

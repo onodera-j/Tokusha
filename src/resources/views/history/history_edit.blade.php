@@ -158,7 +158,7 @@
                             <option value="">窓口の場合のみ選択</option>
                             @foreach($permissionPeriods as $permissionPeriod)
                                 <option value={{$permissionPeriod->id}}
-                                    {{ old('permission_period', $answerData->counter->permission_period ?? '') == $permissionPeriod->id ? 'selected' : ''}}>{{$permissionPeriod->name}}</option>
+                                    {{ old('permission_period', $answerData->counter->permission_period_id ?? '') == $permissionPeriod->id ? 'selected' : ''}}>{{$permissionPeriod->name}}</option>
                             @endforeach
                         </select>
                     </div>
