@@ -46,3 +46,4 @@ Route::post('/answersheet/registration', [AnswersheetController::class, "answers
 Route::get('/history', [AnswersheetController::class, "historyList"])->name('history');
 Route::get('/history/edit', [AnswersheetController::class, "historyEdit"])->name('historyEdit');
 Route::get('/history/search', [AnswersheetController::class, 'historySearch'])->name('historySearch');
+Route::get('/history/preview', [AnswersheerController::class, 'historyPreview'])->name('historyPreview');

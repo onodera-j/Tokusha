@@ -1,0 +1,205 @@
+.content {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.no-print {
+    max-width: 210mm;
+    margin: 0 auto 10px auto;
+    padding: 15px;
+    background: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.sheet-preview {
+    width: 210mm;
+    height: 296mm;
+    margin: 20px auto;
+    padding: 5mm;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    font-family: "MS 明朝", "MS Mincho", "Hiragino Mincho ProN", "BIZ UDPMincho", serif;
+    color: #000;
+    font-size: 12px;
+    position: relative;
+}
+
+.outside-border {
+    border: solid 1px #000;
+    height: 97%;
+}
+
+.sheet-title {
+    text-align: center;
+    font-size: 16px;
+}
+
+.content-sender-container,
+.content-date-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.content-sender {
+    width: auto;
+    text-align: left;
+    padding: 0 20px;
+}
+
+.content-date {
+    padding: 0 20px;
+    text-align: right;
+}
+
+.content-address {
+    padding: 0 20px;
+}
+
+.content-text {
+    padding: 20px;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(8,1fr);
+    width: 95%;
+    border-top: solid 1px #000;
+    border-left: solid 1px #000;
+    margin:0 auto;
+}
+
+.grid-item{
+    border-right: solid 1px #000;
+    border-bottom: solid 1px #000;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.content-allow .grid-item:nth-child(1),
+.content-allow .grid-item:nth-child(4) {
+    grid-column: span 2;
+}
+
+/* 道路名 */
+.content-allow .grid-item:nth-child(2),
+.content-allow .grid-item:nth-child(5) {
+    grid-column: span 2;
+}
+
+/* 区間 */
+.content-allow .grid-item:nth-child(3),
+.content-allow .grid-item:nth-child(6) {
+    grid-column: span 4;
+}
+
+.content-allow .grid-item:nth-child(7),
+.content-disallow .grid-item:nth-child(5),
+.content-disallow .grid-item:nth-child(7) {
+    grid-column: span 1;
+}
+.content-allow .grid-item:nth-child(8),
+.content-disallow .grid-item:nth-child(6),
+.content-disallow .grid-item:nth-child(8) {
+    grid-column: span 7;
+}
+
+.content-disallow .grid-item:nth-child(1),
+.content-disallow .grid-item:nth-child(3) {
+    grid-column: span 3;
+}
+
+.content-disallow .grid-item:nth-child(2),
+.content-disallow .grid-item:nth-child(4) {
+    grid-column: span 5;
+}
+
+.content-allow .grid-item:nth-child(4) {
+    min-height: 80mm;
+}
+
+.content-disallow .grid-item:nth-child(3) {
+    min-height: 8mm;
+}
+
+
+
+.content-allow,
+.content-disallow {
+    margin: 10px 0;
+    padding: 10px 0;
+}
+
+
+.content-allow .th-label {
+    width: 100%;
+        text-align: justify;
+        /* 両端揃えの基本指示 */
+        text-align-last: justify;
+        /* 💡 1行しか設定がない単語でも強制的に均等割り付けにする */
+
+        /* 調整用（文字が左右の枠線にベタ付けになるのを防ぐ余白） */
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+}
+
+.content-disallow .th-label {
+    width: 100%;
+    text-align: justify;
+    /* 両端揃えの基本指示 */
+    text-align-last: justify;
+    /* 💡 1行しか設定がない単語でも強制的に均等割り付けにする */
+
+    /* 調整用（文字が左右の枠線にベタ付けになるのを防ぐ余白） */
+    padding-left: 75px;
+    padding-right: 75px;
+    box-sizing: border-box;
+}
+
+.row-label {
+    width: 100%;
+    text-align: justify;
+        /* 両端揃えの基本指示 */
+        text-align-last: justify;
+        /* 💡 1行しか設定がない単語でも強制的に均等割り付けにする */
+
+        /* 調整用（文字が左右の枠線にベタ付けになるのを防ぐ余白） */
+        padding-left: 15px;
+        padding-right: 15px;
+        box-sizing: border-box;
+}
+
+.grid-item .data-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+}
+
+.content-contact {
+    padding-top: 10px;
+    position: absolute;
+    left: 20mm;
+    right: 20mm;
+    bottom: 10mm;
+    text-align: center;
+}
+
+.diagonal {
+    position:relative;
+    background: linear-gradient(to bottom right,
+                transparent 49.5%,
+                #000000 49.99%,
+                #000000 50.01%,
+                transparent 50.5%);
+        background-size: 100% 100%;
+}

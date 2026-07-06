@@ -115,7 +115,7 @@ class AnswersheetController extends Controller
                 }
 
                 if($validated['destination2']) {
-                    $answer->otherDestinations()->create([
+                    $answer->otherDestination()->create([
                         'second_destination' => $validated['destination2'],
                     ]);
                 }
@@ -269,7 +269,7 @@ class AnswersheetController extends Controller
             return redirect("/history")->with("success", "新規登録が完了しました");
             }
 
-            if($action === 'update'){
+            if($action === 'update' || $action === 'preview'){
 
                 $answer = Answerbase::findOrFail($request->input('answer_id'));
 
@@ -288,13 +288,13 @@ class AnswersheetController extends Controller
                 ]);
 
                 if(!empty($validated['destination2'])){
-                    $answer->otherDestinations()->updateOrCreate(
+                    $answer->otherDestination()->updateOrCreate(
                         ['answerbase_id' => $answer->id],
                         ['second_destination' => $validated['destination2']],
                     );
                 }else{
-                    if($answer->otherDestinations()->exists()) {
-                        $answer->otherDestinations()->delete();
+                    if($answer->otherDestination()->exists()) {
+                        $answer->otherDestination()->delete();
                     }
                 }
 
@@ -435,16 +435,29 @@ class AnswersheetController extends Controller
                 if ($answer->notFreeConditions()->whereNotIn('not_condition_id', $checkedNotFreeIds)->exists()) {
                     $answer->notFreeConditions()->whereNotIn('not_condition_id', $checkedNotFreeIds)->delete();
                 }
-
-
-
-
-
-
-
-
-
             DB::commit();
+
+            if($action === 'preview'){
+                $answerData = Answerbase::with([
+                    'allowRoutes',
+                    'notAllowRoutes',
+                    'allowConditions',
+                    'allowFreeCondition',
+                    'notAllowConditions',
+                    'notFreeConditions',
+                    'otherDestination',
+                    'counter',
+                    'client',
+                    'staffs',
+                ])->find($answer->id);
+
+                $answerSetting = AnswerDocumentSetting::first();
+
+
+                return view("history.history_preview", compact('answerData', 'answerSetting'));
+
+            }
+
             return redirect()->back()->with('success', 'データを上書きしました');
             }
 
@@ -500,7 +513,7 @@ class AnswersheetController extends Controller
                 case 4: // 目的地（例: destination カラムや、別テーブルの second_destination）
                     $query->where(function($q) use ($word) {
                         $q->where('destination', 'LIKE', "%{$word}%")
-                        ->orWhereHas('otherDestinations', function($sq) use ($word) {
+                        ->orWhereHas('otherDestination', function($sq) use ($word) {
                             $sq->where('second_destination', 'LIKE', "%{$word}%");
                         });
                     });
@@ -527,7 +540,7 @@ class AnswersheetController extends Controller
                           ->orWhere('destination', 'LIKE', "%{$word}%")
                           ->orWhereHas('client', function($sq) use ($word) {
                                 $sq->where('name', 'LIKE', "%{$word}%"); })
-                          ->orWhereHas('otherDestinations', function($sq) use ($word) {
+                          ->orWhereHas('otherDestination', function($sq) use ($word) {
                                 $sq->where('second_destination', 'LIKE', "%{$word}%"); })
                           ->orWhereHas('allowRoutes', function($sq) use ($word) {
                                 $sq->where('short_name', 'LIKE', "%{$word}%")
@@ -553,7 +566,7 @@ class AnswersheetController extends Controller
     //回答書作成履歴詳細ページの表示
     public function historyEdit(Request $request){
         $id = $request->id;
-        $answerData = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'allowConditions', 'allowFreeCondition', 'notAllowConditions', 'notFreeConditions', 'counter', 'minWidths', 'otherDestinations', 'vehicles', 'client', 'staffs', ])->find($id);
+        $answerData = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'allowConditions', 'allowFreeCondition', 'notAllowConditions', 'notFreeConditions', 'counter', 'minWidths', 'otherDestination', 'vehicles', 'client', 'staffs', ])->find($id);
 
         $staffMembers = StaffMember::where("delete_flags", 0)
                             ->get();
@@ -590,5 +603,6 @@ class AnswersheetController extends Controller
 
         return view("history.history_edit", compact("answerData", "staffMembers", "clients", "answerSetting", "permissionPeriods", "routeCategories", "conditions", "notAllows"));
     }
+
 
 }

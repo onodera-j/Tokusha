@@ -168,7 +168,7 @@
                         目的地2
                     </div>
                     <div class="item-form">
-                        <input type="text" name="destination2" value="{{old('destination2', $answerData->otherDestinations->second_destination ?? '')}}" placeholder="">
+                        <input type="text" name="destination2" value="{{old('destination2', $answerData->otherDestination->second_destination ?? '')}}" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
@@ -500,7 +500,7 @@
     <div class="button-submit">
         <input type="hidden" name="answer_id" value="{{$answerData->id}}">
         <button type="submit" name="action" value="update" class="submit">修正</button>
-        <button type="submit" name="action" value="print" class="submit">印刷</button>
+        <button type="submit" name="action" value="preview" class="submit">印刷</button>
     </div>
 
     </form>

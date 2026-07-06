@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Answerbase extends Model
 {
@@ -60,7 +61,7 @@ class Answerbase extends Model
         return $this->hasMany(Minwidth::class);
     }
 
-    public function otherDestinations()
+    public function otherDestination()
     {
         return $this->hasOne(OtherDestination::class);
     }
@@ -78,6 +79,41 @@ class Answerbase extends Model
     public function staffs()
     {
         return $this->belongsTo(StaffMember::class, 'staff_id');
+    }
+
+    public function getApplicationDateWarekiAttribute()
+    {
+
+        $date = Carbon::parse($this->application_date);
+
+        // 令和の計算ロジック（どのサーバー環境でも100%動くコード）
+        if ($date->gte('2019-05-01')) {
+            $reiwaYear = $date->year - 2019 + 1;
+            $yearStr = ($reiwaYear === 1) ? '元' : $reiwaYear;
+            return "令和{$yearStr}年{$date->month}月{$date->day}日";
+        }
+
+        // 平成以前（必要に応じて追加可能）
+        return $date->format('Y年m月d日');
+    }
+
+    public function getApprovalDateWarekiAttribute()
+    {
+        if (empty($this->approval_date)) {
+            return '年　　月　　日';
+        }
+
+        $date = Carbon::parse($this->approval_date);
+
+        // 令和の計算ロジック（どのサーバー環境でも100%動くコード）
+        if ($date->gte('2019-05-01')) {
+            $reiwaYear = $date->year - 2019 + 1;
+            $yearStr = ($reiwaYear === 1) ? '元' : $reiwaYear;
+            return "令和{$yearStr}年{$date->month}月{$date->day}日";
+        }
+
+        // 平成以前（必要に応じて追加可能）
+        return $date->format('Y年m月d日');
     }
 
 }

@@ -15,6 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string("numbering_name");
             $table->string("answer_year");
+            $table->string("position");
+            $table->string("administrator_name");
+            $table->string("department");
+            $table->string("tel");
+            $table->integer("extension")->nullable();
             $table->timestamps();
         });
     }

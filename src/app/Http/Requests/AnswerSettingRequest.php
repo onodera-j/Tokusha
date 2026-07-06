@@ -24,6 +24,12 @@ class AnswerSettingRequest extends FormRequest
         return [
             "numbering_name" => ["required","string"],
             "answer_year" => ["required","string"],
+            "position" => ["required","string"],
+            "administrator_name" => ["required","string"],
+            "department" => ["required","string"],
+            "tel" => ["required","string"],
+            "extension" => ["nullable","integer"],
+
         ];
     }
 
@@ -32,6 +38,11 @@ class AnswerSettingRequest extends FormRequest
         return [
             'numbering_name.required' => '回答書採番名してください',
             'answer_year.required' => '回答書決裁年を入力してください',
+            'position.required' => '道路管理者 役職名を入力してください',
+            'administrator_name.required' => '道路管理者 名前を入力してください',
+            'department.required' => '担当部署を入力してください',
+            'tel.required' => '問い合わせ連絡先を入力してください',
+            'extension.integer' => '係内線は数値を入力してください',
         ];
     }
 }

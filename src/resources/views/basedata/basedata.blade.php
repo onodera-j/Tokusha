@@ -54,6 +54,81 @@
                 </div>
             </div>
 
+            <div class="group-item">
+                <div class="item-title required">
+                    道路管理者 役職名
+                </div>
+                <div class="item-form">
+                    <input type="text" name="position" value="{{ old("position", $answersetting->position ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('position')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="item-title required">
+                    道路管理者 名前
+                </div>
+                <div class="item-form">
+                    <input type="text" name="administrator_name" value="{{ old("administrator_name", $answersetting->administrator_name ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('administrator_name')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="item-title required">
+                    担当部署
+                </div>
+                <div class="item-form">
+                    <input type="text" name="department" value="{{ old("department", $answersetting->department ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('department')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="item-title required">
+                    問い合わせ連絡先
+                </div>
+                <div class="item-form">
+                    <input type="text" name="tel" value="{{ old("tel", $answersetting->tel ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('tel')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="item-title any">
+                    係内線
+                </div>
+                <div class="item-form">
+                    <input type="text" name="extension" value="{{ old("extension", $answersetting->extension ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('extension')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
         </div>
 
 
