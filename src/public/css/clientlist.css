@@ -53,6 +53,8 @@
 .alert-success::before {
     content: "■";
     margin-right: 5px;
+    width: 80%;
+    margin: 0 auto;
 }
 
 

@@ -105,7 +105,11 @@ class ListController extends Controller
     //登録路線一覧ページの表示
     public function routeList() {
 
-        $routes = Route::where('delete_flags', 0)->get();
+        $routes = Route::where('delete_flags', 0)
+                    ->orderBy('routecategory_id', 'asc')
+                    ->orderBy('short_name', 'asc')
+                    ->orderBy('short_number', 'asc')
+                    ->get();
 
         return view("route.routelist", compact('routes'));
     }
@@ -269,5 +273,5 @@ class ListController extends Controller
         }
     }
 
-    
+
 }

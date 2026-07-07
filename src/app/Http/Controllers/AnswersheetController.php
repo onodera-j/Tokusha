@@ -473,7 +473,7 @@ class AnswersheetController extends Controller
 
         $answerDatas = Answerbase::with(['allowRoutes', 'notAllowRoutes', 'client', 'counter'])
                         ->orderBy('numbering_name', 'desc')
-                        ->orderBy('approval_number', 'desc')
+                        ->orderByRaw('CAST(approval_number AS UNSIGNED) DESC')
                         ->latest()->paginate(5);
 
         $type = 0;
