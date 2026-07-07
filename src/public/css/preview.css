@@ -38,9 +38,14 @@
     height: 97%;
 }
 
+.outside-border.case4 {
+    border: none;
+}
+
 .sheet-title {
     text-align: center;
     font-size: 16px;
+    padding: 10px 0;
 }
 
 .content-sender-container,
@@ -48,7 +53,18 @@
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    padding: 5px 0;
 }
+
+.content-date.case4{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 20px;
+    margin: 10px 0 -20px;
+}
+
+
 
 .content-sender {
     width: auto;
@@ -66,7 +82,7 @@
 }
 
 .content-text {
-    padding: 20px;
+    padding: 5px 20px;
 }
 
 .content-grid {
@@ -123,15 +139,45 @@
     grid-column: span 5;
 }
 
+.content-allow.case4 .grid-item {
+    grid-column: span 8;
+}
+
+.content-allow.case2 .grid-item:nth-child(4) {
+    min-height: 70mm;
+}
+
+.content-allow.case3 .grid-item:nth-child(4) {
+    min-height: 8mm;
+}
+
 .content-allow .grid-item:nth-child(4) {
     min-height: 80mm;
+}
+
+.content-disallow.case3 .grid-item:nth-child(3) {
+    min-height: 70mm;
+}
+
+.content-allow.case4 .grid-item:nth-child(1),
+.content-allow.case4 .grid-item:nth-child(3),
+.content-allow.case4 .grid-item:nth-child(5),
+.content-allow.case4 .grid-item:nth-child(6) {
+    min-height: 8mm;
+}
+
+.content-allow.case4 .grid-item:nth-child(2),
+.content-allow.case4 .grid-item:nth-child(7) {
+    min-height: 70mm;
+}
+
+.content-allow.case4 .grid-item:nth-child(4){
+    min-height: 30mm;
 }
 
 .content-disallow .grid-item:nth-child(3) {
     min-height: 8mm;
 }
-
-
 
 .content-allow,
 .content-disallow {
@@ -139,18 +185,18 @@
     padding: 10px 0;
 }
 
-
-.content-allow .th-label {
+.content-allow .th-label,
+.row-label {
     width: 100%;
-        text-align: justify;
-        /* 両端揃えの基本指示 */
-        text-align-last: justify;
-        /* 💡 1行しか設定がない単語でも強制的に均等割り付けにする */
+    text-align: justify;
+    /* 両端揃えの基本指示 */
+    text-align-last: justify;
+    /* 💡 1行しか設定がない単語でも強制的に均等割り付けにする */
 
-        /* 調整用（文字が左右の枠線にベタ付けになるのを防ぐ余白） */
-        padding-left: 15px;
-        padding-right: 15px;
-        box-sizing: border-box;
+    /* 調整用（文字が左右の枠線にベタ付けになるのを防ぐ余白） */
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
 }
 
 .content-disallow .th-label {
@@ -166,17 +212,14 @@
     box-sizing: border-box;
 }
 
-.row-label {
-    width: 100%;
-    text-align: justify;
-        /* 両端揃えの基本指示 */
-        text-align-last: justify;
-        /* 💡 1行しか設定がない単語でも強制的に均等割り付けにする */
+.content-allow.case4 .th-label{
+    width:100%;
+    text-align: left;
+    text-align-last: left;
+}
 
-        /* 調整用（文字が左右の枠線にベタ付けになるのを防ぐ余白） */
-        padding-left: 15px;
-        padding-right: 15px;
-        box-sizing: border-box;
+.content-allow.case4 .td-data {
+    padding: 5px 30px;
 }
 
 .grid-item .data-list {
