@@ -62,10 +62,10 @@
                     <td class="td-alignleft">{{$answerData['destination']}}</td>
                     <td class="td-alignleft">
                         @foreach($answerData->allowRoutes as $route)
-                        {{$route['short_number']}}
+                        {{$route['short_name']}}{{$route['short_number']}}
                         @endforeach
                         @foreach($answerData->notAllowRoutes as $notroute)
-                        {{$notroute['short_number']}}
+                        {{$notroute['short_name']}}{{$notroute['short_number']}}
                         @endforeach
                     </td>
                     <td class="td-widthfixed150">{{$answerData->approval_date ?? '未登録'}}</td>
