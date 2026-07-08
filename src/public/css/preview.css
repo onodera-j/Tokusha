@@ -1,10 +1,7 @@
 .content {
     width: 80%;
     margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 50px;
-    justify-content: center;
+
     padding: 50px 0;
 }
 
@@ -22,7 +19,7 @@
 
 .sheet-preview {
     width: 210mm;
-    height: 296mm;
+    height: 297mm;
     margin: 20px auto;
     padding: 5mm;
     background-color: #fff;
@@ -245,4 +242,119 @@
                 #000000 50.01%,
                 transparent 50.5%);
         background-size: 100% 100%;
+}
+
+.sheet-preview.fax {
+    font-size: 20px;
+}
+
+.sheet-preview.fax .sheet-title {
+    font-size: 30px;
+}
+
+.content-date.fax {
+    margin-right: 50px;
+}
+
+.content-fax {
+    padding: 10px 0;
+}
+
+.table-fax {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.table-fax,
+.table-fax tr {
+    border: solid 1px #000;
+}
+
+.table-fax td {
+    padding: 30px 0;
+}
+
+.table-fax .center{
+    text-align: center;
+    margin-left: -10px;
+}
+
+.table-fax tr:nth-child(7){
+    height: 50mm;
+
+}
+
+
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+        /* ヘッダー・フッター（日付やURL）を消す設定は完全に維持 */
+    }
+
+    /* 1. 全ての標準要素を画面から消去（余白も完全にゼロにする） */
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        background: #fff !important;
+        display: block !important;
+    }
+
+    /* 🚨 追加：親要素（.contentなど）に残っているかもしれない余白や横幅の制限を強制リセット */
+    .content,
+    main,
+    div[class*="container"] {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: none !important;
+        display: block !important;
+    }
+
+    /* 印刷に関係ないボタン等を隠す */
+    .no-print,
+    header,
+    nav,
+    footer,
+    .sidebar {
+        display: none !important;
+    }
+
+    /* 2. 順番・枚数が成功している relative 設定をベースに、右寄りのズレだけを上書き */
+    .sheet-preview {
+        display: block !important;
+        position: relative !important;
+        float: none !important;
+
+        /* 🚨 右寄りを解消するための修正ポイント */
+        margin: 0 !important;
+        /* 外側の余白を完全にゼロにする */
+        left: 0 !important;
+        /* 左端の基準点をクリア */
+        margin-left: 0 !important;
+        /* もし画面用で margin: auto 等が残っていても強制的に左へ */
+
+        width: 210mm !important;
+        height: 297mm !important;
+        box-shadow: none !important;
+        box-sizing: border-box !important;
+        background-color: #fff !important;
+
+        /* 1つのコンテナ内で不意にページがちぎれるのを防ぐ */
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    /* 3. 2番目の要素（FAX送信書）の「直前」で確実にページをめくる */
+    .sheet-preview:nth-of-type(1) {
+        margin-top: 0 !important;
+    }
+
+    .sheet-preview:nth-of-type(2) {
+        page-break-before: always !important;
+        break-before: page !important;
+    }
 }

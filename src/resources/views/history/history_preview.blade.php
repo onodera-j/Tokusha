@@ -313,7 +313,7 @@
     別記様式５
         <div class="outside-border">
             <div class="sheet-title">
-                特殊車両通行許可協議回答書(case3)
+                特殊車両通行許可協議回答書
             </div>
             <div class="content-date-container">
                 <div class="content-date">
@@ -452,7 +452,7 @@
 
 
         <div class="sheet-title">
-            車両通行条件書(case4)
+            車両通行条件書
         </div>
 
         <div class="content-date case4">
@@ -517,20 +517,70 @@
         </div>
     </div>
 
+
     @break
 
     @endswitch
 
+    @if($answerData->sheet_type != 4)
+
+    <div class="sheet-preview fax">
 
 
+        <div class="sheet-title">
+            FAX送信書
+        </div>
 
+        <div class="content-date fax">
+            <div>
+                {{ $answerData->approval_date_wareki }}
+            </div>
+        </div>
 
+        <div class="content-fax">
+            <table class="table-fax">
+                <tbody>
+                    <tr>
+                        <th>件名</th>
+                        <td>特車協議回答</td>
+                    </tr>
+                    <tr>
+                        <th>宛先</th>
+                        <td>{{$answerData->client->fax_address1}}<br>
+                            {{$answerData->client->fax_address2}}<br>
+                            {{$answerData->client->fax_address3}} 御中</td>
+                    </tr>
+                    <tr>
+                        <th>FAX</th>
+                        <td class="center">{{$answerData->client->fax}}</td>
+                    </tr>
+                    <tr>
+                        <th>TEL</th>
+                        <td class="center">{{$answerData->client->tel}}</td>
+                    </tr>
+                        <th>送信者</th>
+                        <td>{{$answerSetting->department}}<br>
+                            TEL：{{$answerSetting->tel}}<br>
+                            FAX：<br>
+                            〒<br>
+                            東京都渋山区
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>送付枚数</th>
+                        <td class="center">A4　　　枚（送信書含む）</td>
+                    </tr>
+                    <tr>
+                        <th>通信欄</th>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
+    </div>
+    <div class="page-break"></div>
+    @endif
 
 </div>
-
-
-
-
-
 @endsection
