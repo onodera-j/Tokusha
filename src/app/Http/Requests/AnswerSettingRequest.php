@@ -28,7 +28,10 @@ class AnswerSettingRequest extends FormRequest
             "administrator_name" => ["required","string"],
             "department" => ["required","string"],
             "tel" => ["required","string"],
+            "fax" => ["required","string"],
             "extension" => ["nullable","integer"],
+            "postcode" => ["required","string"],
+            "address" => ["required","string"],
 
         ];
     }
@@ -41,8 +44,12 @@ class AnswerSettingRequest extends FormRequest
             'position.required' => '道路管理者 役職名を入力してください',
             'administrator_name.required' => '道路管理者 名前を入力してください',
             'department.required' => '担当部署を入力してください',
-            'tel.required' => '問い合わせ連絡先を入力してください',
+            'tel.required' => 'TELを入力してください',
+            'fax.required' => 'FAXを入力してください',
             'extension.integer' => '係内線は数値を入力してください',
+            'postcode.required' => '郵便番号を入力してください',
+            'address.required' => '住所を入力してください',
+
         ];
     }
 }

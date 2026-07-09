@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string("administrator_name");
             $table->string("department");
             $table->string("tel");
+            $table->string("fax");
             $table->integer("extension")->nullable();
+            $table->string("postcode");
+            $table->string("address");
             $table->timestamps();
         });
     }

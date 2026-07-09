@@ -14,7 +14,10 @@ class AnswerDocumentSetting extends Model
             'administrator_name',
             'department',
             'tel',
-            'extension'
+            'fax',
+            'extension',
+            'postcode',
+            'address',
 
     ];
 

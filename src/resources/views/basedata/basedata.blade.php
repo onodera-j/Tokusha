@@ -101,10 +101,25 @@
 
             <div class="group-item">
                 <div class="item-title required">
-                    問い合わせ連絡先
+                    TEL
                 </div>
                 <div class="item-form">
                     <input type="text" name="tel" value="{{ old("tel", $answersetting->tel ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('tel')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="item-title required">
+                    FAX
+                </div>
+                <div class="item-form">
+                    <input type="text" name="fax" value="{{ old("fax", $answersetting->fax ) }}">
                 </div>
 
                 <div class="item-error">
@@ -124,6 +139,36 @@
 
                 <div class="item-error">
                     @error('extension')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="item-title required">
+                    郵便番号
+                </div>
+                <div class="item-form">
+                    <input type="text" name="postcode" value="{{ old("postcode", $answersetting->postcode ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('postcode')
+                    {{ $message }}
+                    @enderror
+                </div>
+            </div>
+
+            <div class="group-item">
+                <div class="item-title required">
+                    住所
+                </div>
+                <div class="item-form">
+                    <input type="text" name="address" value="{{ old("address", $answersetting->address ) }}">
+                </div>
+
+                <div class="item-error">
+                    @error('address')
                     {{ $message }}
                     @enderror
                 </div>

@@ -20,7 +20,10 @@ class AnswerDocumentSettingsTableSeeder extends Seeder
             "administrator_name" => "山田 太郎",
             "department" => "渋山区 土木部 道路管理課 管理係",
             "tel" => "00-0000-0000",
-            "extension" => "2222"
+            "fax" => "11-1111-1111",
+            "extension" => "2222",
+            "postcode" => "123-4567",
+            "address" => "東京都渋山区宇田山町2-2"
         ];
         DB::table("answer_document_settings")->insert($param);
     }
