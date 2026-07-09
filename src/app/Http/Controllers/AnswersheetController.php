@@ -21,6 +21,7 @@ use App\Models\Counter;
 use App\Models\Minwidth;
 use App\Models\OtherDestination;
 use App\Models\Vehicle;
+use App\Models\AnswerbaseRemark;
 use App\Http\Requests\AnswersheetRequest;
 
 class AnswersheetController extends Controller
@@ -435,6 +436,24 @@ class AnswersheetController extends Controller
                 if ($answer->notFreeConditions()->whereNotIn('not_condition_id', $checkedNotFreeIds)->exists()) {
                     $answer->notFreeConditions()->whereNotIn('not_condition_id', $checkedNotFreeIds)->delete();
                 }
+
+                //4.備考欄の登録・更新
+                if(empty($validated['answer_remarks']) && empty($validated['fax_remarks']))
+                    {
+                        if($answer->remark()->exists()) {
+                            $answer->remark()->delete();
+                        }
+                    }else{
+                        $answer->remark()->updateOrCreate(
+                                ['answerbase_id' => $answer->id],
+                                [
+                                    'answer_remarks' => $validated['answer_remarks'] ?? null,
+                                    'fax_remarks' => $validated['fax_remarks'] ?? null,
+                                ]
+                            );
+                    }
+
+
             DB::commit();
 
             if($action === 'preview'){

@@ -497,6 +497,33 @@
 
     </div>
 
+    <div class="free-content">
+        <div class="form-container two-column">
+            <div class="form-block">
+
+                <div class="form-group">
+                    <div class="item-title any">
+                        回答書 備考
+                    </div>
+                    <div class="item-form">
+                        <textarea name="answer_remarks" placeholder="123456">{{old('answer_remarks', $answerData->remark->answer_remarks ?? '')}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-block">
+                <div class="form-group">
+                    <div class="item-title any">
+                        FAX 通信欄
+                    </div>
+                    <div class="item-form">
+                        <textarea name="fax_remarks" placeholder="123456">{{old('fax_remarks', $answerData->remark->fax_remarks ?? '')}}</textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="button-submit">
         <input type="hidden" name="answer_id" value="{{$answerData->id}}">
         <button type="submit" name="action" value="update" class="submit">修正</button>

@@ -97,7 +97,7 @@
                             @foreach($answerData->allowConditions as $condition)
                                 <li>{{$condition->content}}</li>
                             @endforeach
-                                <li>{{$answerData->allowFreeCondition->condition_free}}
+                                <li>{{$answerData->allowFreeCondition->condition_free ?? ''}}
                                 </li>
                         </ul>
                     </div>
@@ -226,7 +226,7 @@
                             @foreach($answerData->allowConditions as $condition)
                                 <li>{{$condition->content}}</li>
                             @endforeach
-                                <li>{{$answerData->allowFreeCondition->condition_free}}
+                                <li>{{$answerData->allowFreeCondition->condition_free ?? ''}}
                                 </li>
                         </ul>
                     </div>
@@ -407,7 +407,7 @@
                                 <li>{{$condition->content}}</li>
                             @endforeach
                                 <li>
-                                    {{$answerData->notFreeConditions->where('not_condition_id', -10)->first()->condition_free}}
+                                    {{$answerData->notFreeConditions->where('not_condition_id', -10)->first()->condition_free ?? ''}}
                                 </li>
                         </ul>
 
@@ -420,7 +420,7 @@
                                 <li>{{$condition->content}}</li>
                             @endforeach
                                 <li>
-                                    {{$answerData->notFreeConditions->where('not_condition_id', -11)->first()->condition_free}}
+                                    {{$answerData->notFreeConditions->where('not_condition_id', -11)->first()->condition_free ?? ''}}
                                 </li>
                         </ul>
                     </div>
@@ -561,9 +561,9 @@
                         <th>送信者</th>
                         <td>{{$answerSetting->department}}<br>
                             TEL：{{$answerSetting->tel}}<br>
-                            FAX：<br>
-                            〒<br>
-                            東京都渋山区
+                            FAX：{{$answerSetting->fax}}<br>
+                            〒 {{$answerSetting->postcode}}<br>
+                            {{$answerSetting->address}}
                         </td>
                     </tr>
                     <tr>
@@ -572,7 +572,7 @@
                     </tr>
                     <tr>
                         <th>通信欄</th>
-                        <td></td>
+                        <td>{{$answerData->remark->fax_remarks ?? ''}}</td>
                     </tr>
                 </tbody>
             </table>

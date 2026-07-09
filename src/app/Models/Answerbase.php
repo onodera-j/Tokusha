@@ -81,6 +81,11 @@ class Answerbase extends Model
         return $this->belongsTo(StaffMember::class, 'staff_id');
     }
 
+    public function remark()
+    {
+        return $this->hasOne(AnswerbaseRemark::class);
+    }
+
     public function getApplicationDateWarekiAttribute()
     {
 

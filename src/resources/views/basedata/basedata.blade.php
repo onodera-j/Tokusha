@@ -101,7 +101,7 @@
 
             <div class="group-item">
                 <div class="item-title required">
-                    TEL
+                    TEL(ハイフン含む)
                 </div>
                 <div class="item-form">
                     <input type="text" name="tel" value="{{ old("tel", $answersetting->tel ) }}">
@@ -116,7 +116,7 @@
 
             <div class="group-item">
                 <div class="item-title required">
-                    FAX
+                    FAX(ハイフン含む)
                 </div>
                 <div class="item-form">
                     <input type="text" name="fax" value="{{ old("fax", $answersetting->fax ) }}">
@@ -146,7 +146,7 @@
 
             <div class="group-item">
                 <div class="item-title required">
-                    郵便番号
+                    郵便番号(ハイフン含む)
                 </div>
                 <div class="item-form">
                     <input type="text" name="postcode" value="{{ old("postcode", $answersetting->postcode ) }}">

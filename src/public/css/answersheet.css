@@ -77,6 +77,13 @@
     display: block;
 }
 
+.free-content{
+    margin: 10px 0;
+    width: 100%;
+    padding: 1.5em 1em;
+    background-color: #fff;
+}
+
 .two-column {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -93,6 +100,8 @@
 .form-group {
     display: contents;
 }
+
+
 
 .item-title {
     text-align: left;
@@ -146,6 +155,20 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.free-content .form-group {
+    display: block;
+}
+
+.free-content .item-form{
+    padding: 10px 0;
+}
+
+.free-content .item-form textarea{
+    width: 400px;
+    height: 40px;
+    resize: none;
 }
 
 .route-row {

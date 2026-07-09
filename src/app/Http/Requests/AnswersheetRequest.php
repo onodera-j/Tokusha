@@ -101,6 +101,9 @@ class AnswersheetRequest extends FormRequest
             // 自由記述にチェックがあるときはテキスト入力を必須にする
             'conditions_free' => 'required_if:condition_id.*,-1',
             'not_conditions_free' => 'required_if:condition_id.*,-10,-11',
+
+            'answer_remarks' => 'nullable',
+            'fax_remarks' => 'nullable',
         ];
     }
 
