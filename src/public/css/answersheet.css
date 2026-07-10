@@ -14,6 +14,20 @@
     text-align: left;
     font-size: 20px;
     padding: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content-back a {
+    text-decoration: none;
+    color: #99836e;
+    font-size: 16px;
+}
+
+.content-back::before {
+    content: '▶';
+    margin-right: 6px;
+    font-size: 16px;
 }
 
 .radio-form {
@@ -368,5 +382,6 @@
     height: 20px;
     text-align: center;
     align-items: center;
-
 }
+
+

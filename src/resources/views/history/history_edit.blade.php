@@ -11,7 +11,10 @@
         @csrf
     <div class="content-menu">
         <div class="menu-title">
-            作成する回答書の種類
+            <div>
+                作成する回答書の種類
+            </div>
+            <div class="content-back"><a href="{{ url()->previous() }}">一覧に戻る</a></div>
         </div>
         <div class="radio-form">
             <div class="radio-group">

@@ -9,10 +9,14 @@
 <div class="content">
 
     <div class="no-print">
-    <button onclick="changeFontSize(1)">文字大きく ＋</button>
-    <button onclick="changeFontSize(-1)">文字小さく ─</button>
-    <button onclick="window.print()" style="font-weight: bold; background: #007bff; color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer;">🖨️ 印刷 / PDF保存</button>
+        <div>
+            <button onclick="changeFontSize(1)">文字大きく ＋</button>
+            <button onclick="changeFontSize(-1)">文字小さく ─</button>
+            <button onclick="window.print()" style="font-weight: bold; background: #007bff; color: white; border: none; padding: 5px 15px; border-radius: 4px; cursor: pointer;">🖨️ 印刷 / PDF保存</button>
+        </div>
+        <div class="content-back"><a href="{{ url()->previous() }}">詳細に戻る</a></div>
     </div>
+
 
     @switch($answerData->sheet_type)
 
@@ -129,7 +133,8 @@
             </div>
 
             <div class="content-text">
-                　備　　考
+                <div>　備　　考</div>
+                <div class="answer-remarks">{{$answerData->remark->answer_remarks ?? ''}}</div>
             </div>
             <div class="content-contact">
                 <div>
@@ -291,7 +296,8 @@
             </div>
 
             <div class="content-text">
-                　備　　考
+                <div>　備　　考</div>
+                <div class="answer-remarks">{{$answerData->remark->answer_remarks ?? ''}}</div>
             </div>
             <div class="content-contact">
                 <div>
@@ -429,7 +435,8 @@
             </div>
 
             <div class="content-text">
-                　備　　考
+                <div>　備　　考</div>
+                <div class="answer-remarks">{{$answerData->remark->answer_remarks ?? ''}}</div>
             </div>
             <div class="content-contact">
                 <div>
@@ -572,7 +579,7 @@
                     </tr>
                     <tr>
                         <th>通信欄</th>
-                        <td>{{$answerData->remark->fax_remarks ?? ''}}</td>
+                        <td class="fax-remarks">{{$answerData->remark->fax_remarks ?? ''}}</td>
                     </tr>
                 </tbody>
             </table>

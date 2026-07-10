@@ -13,8 +13,18 @@
     border-radius: 4px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
+    justify-content: space-between;
     gap: 10px;
     align-items: center;
+}
+
+.content-back a {
+    text-decoration: none;
+    color: #99836e;
+}
+.content-back::before {
+    content: '▶';
+    margin-right: 6px;
 }
 
 .sheet-preview {
@@ -284,6 +294,15 @@
 
 }
 
+.answer-remarks,
+.fax-remarks {
+    white-space: pre-wrap;
+}
+
+.answer-remarks{
+    padding: 10px 25px ;
+}
+
 
 @media print {
     @page {
@@ -306,12 +325,19 @@
     /* 🚨 追加：親要素（.contentなど）に残っているかもしれない余白や横幅の制限を強制リセット */
     .content,
     main,
-    div[class*="container"] {
+    div[class*="container"]:not(.content-sender-container):not(.content-date-container) {
         margin: 0 !important;
         padding: 0 !important;
         width: 100% !important;
         max-width: none !important;
         display: block !important;
+    }
+
+    .content-sender-container,
+    .content-date-container {
+        display: flex !important;
+        justify-content: flex-end !important;
+        width: 100% !important;
     }
 
     /* 印刷に関係ないボタン等を隠す */
